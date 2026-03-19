@@ -574,11 +574,16 @@ Return ONLY the JSON object, no markdown formatting."""
     for assertion in assertions:
         try:
             # Evaluate the check expression with output and execution_time_ms in scope
-            result = eval(assertion.check, {"__builtins__": {
-                "len": len, "str": str, "int": int, "float": float,
-                "isinstance": isinstance, "any": any, "all": all,
-                "sum": sum, "dict": dict, "list": list, "set": set,
-            }}, {"output": output, "execution_time_ms": execution_time_ms})
+            eval_globals = {
+                "__builtins__": {
+                    "len": len, "str": str, "int": int, "float": float,
+                    "isinstance": isinstance, "any": any, "all": all,
+                    "sum": sum, "dict": dict, "list": list, "set": set,
+                },
+                "output": output,
+                "execution_time_ms": execution_time_ms,
+            }
+            result = eval(assertion.check, eval_globals)
 
             if result:
                 passed_count += 1

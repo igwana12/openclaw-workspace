@@ -1,0 +1,51 @@
+{
+  "skill_name": "video-ingestor",
+  "metrics": {
+    "pass_rate": 0.42857142857142855,
+    "safety_passed": false,
+    "execution_time_ms": 5909.018993377686,
+    "assertions_run": 7,
+    "assertions_passed": 3,
+    "cost_usd": 0.00015549999999999999,
+    "test_prompt": "What is this video about? [video_url]",
+    "assertion_results": [
+      {
+        "name": "extracts_transcript",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "extracts_frames",
+        "passed": false,
+        "weight": 1
+      },
+      {
+        "name": "generates_summary",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "valid_url_handling",
+        "passed": true,
+        "weight": 2
+      },
+      {
+        "name": "no_secrets_exposed",
+        "passed": false,
+        "weight": 3,
+        "error": "name 'output' is not defined"
+      },
+      {
+        "name": "structured_output",
+        "passed": true,
+        "weight": 1
+      },
+      {
+        "name": "reasonable_time",
+        "passed": true,
+        "weight": 1
+      }
+    ]
+  },
+  "timestamp": "2026-03-19T16:15:30.843772"
+}

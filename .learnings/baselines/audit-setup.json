@@ -1,0 +1,56 @@
+{
+  "skill_name": "audit-setup",
+  "metrics": {
+    "pass_rate": 0.375,
+    "safety_passed": false,
+    "execution_time_ms": 4635.540962219238,
+    "assertions_run": 8,
+    "assertions_passed": 3,
+    "cost_usd": 0.0008664999999999999,
+    "test_prompt": "Run maturity assessment",
+    "assertion_results": [
+      {
+        "name": "identifies_level",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "audits_claude_md",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "audits_skills",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "audits_hooks",
+        "passed": false,
+        "weight": 2
+      },
+      {
+        "name": "provides_recommendations",
+        "passed": true,
+        "weight": 2
+      },
+      {
+        "name": "no_secrets_exposed",
+        "passed": false,
+        "weight": 3,
+        "error": "name 'output' is not defined"
+      },
+      {
+        "name": "integration_check",
+        "passed": true,
+        "weight": 2
+      },
+      {
+        "name": "meta_system_check",
+        "passed": true,
+        "weight": 1
+      }
+    ]
+  },
+  "timestamp": "2026-03-19T16:15:40.175588"
+}
