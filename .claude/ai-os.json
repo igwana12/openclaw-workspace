@@ -35,18 +35,32 @@
           "registry": "skills/registry.json",
           "extreme_pro_source": "/Volumes/Extreme Pro/SKILLS",
           "status": "active",
-          "skill_count": 38,
-          "skill_breakdown": {
-            "trading_production": 16,
+          "local_installation": {
+            "path": "~/.claude/skills/",
+            "total_skills_on_mac": "~794",
+            "trading_skills_installed": 17,
+            "installed_at": "2026-03-19T15:36:00Z",
+            "note": "Full SKILL.md + references copied from Extreme Pro to ~/.claude/skills/trading/"
+          },
+          "extreme_pro_skills": {
+            "cataloged": 38,
+            "trading_production": 17,
             "general_reference": 22,
             "trading_agents": 5,
             "trading_workflows": 1
           },
+          "repo_skills": {
+            "path": ".claude/skills/",
+            "trading_stubs": 17,
+            "general_stubs": 22,
+            "note": "Repo contains reference stubs; full content lives in ~/.claude/skills/ on local Mac"
+          },
           "categories": [
-            ".claude/skills/trading/ (16 production trading skills)",
-            ".claude/skills/general/ (22 general-purpose skills)"
+            ".claude/skills/trading/ (17 production trading skills - INSTALLED)",
+            ".claude/skills/general/ (22 general-purpose skills - stubs)",
+            "~/.claude/skills/ (~794 total skills on local Mac)"
           ],
-          "note": "All 38 skills cataloged from Extreme Pro SKILLS directory with stub files in .claude/skills/"
+          "pending_catalog": "~794 existing skills in ~/.claude/skills/ need to be inventoried"
         }
       }
     },
