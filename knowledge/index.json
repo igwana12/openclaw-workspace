@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-03-19T00:00:00Z",
+  "description": "OpenClaw Knowledge Base - Unified registry of ingested content, entities, and relationships",
+  "sources": {
+    "ingested": [
+      {
+        "id": "timon-capital-2026-03-17",
+        "type": "document",
+        "title": "Timon Capital Analysis",
+        "source_file": "TIMON-CAPITAL-ANALYSIS.md",
+        "ingested_at": "2026-03-17T16:21:36Z",
+        "ingestion_method": "manual",
+        "entities_extracted": [
+          "timon-capital",
+          "brighton",
+          "waza",
+          "omnibiz"
+        ],
+        "topics": [
+          "finance",
+          "venture-capital",
+          "portfolio-management",
+          "capital-returns"
+        ],
+        "tags": ["vc", "portfolio", "lp-communication"]
+      }
+    ],
+    "generated": [],
+    "curated": []
+  },
+  "entities": {
+    "companies": {
+      "count": 4,
+      "items": [
+        {"id": "timon-capital", "type": "fund", "mentions": 1},
+        {"id": "brighton", "type": "portfolio-company", "mentions": 1},
+        {"id": "waza", "type": "portfolio-company", "mentions": 1},
+        {"id": "omnibiz", "type": "portfolio-company", "mentions": 1}
+      ]
+    },
+    "people": {
+      "count": 0,
+      "items": []
+    },
+    "concepts": {
+      "count": 3,
+      "items": [
+        {"id": "capital-returns", "type": "financial-concept"},
+        {"id": "moic", "type": "metric"},
+        {"id": "portfolio-management", "type": "strategy"}
+      ]
+    }
+  },
+  "relationships": [
+    {
+      "type": "portfolio_company",
+      "from": "timon-capital",
+      "to": "omnibiz"
+    },
+    {
+      "type": "portfolio_company",
+      "from": "timon-capital",
+      "to": "waza"
+    },
+    {
+      "type": "portfolio_company",
+      "from": "timon-capital",
+      "to": "brighton"
+    }
+  ],
+  "skill_mappings": {
+    "financial-analysis": ["timon-capital-2026-03-17"],
+    "lp-communication": ["timon-capital-2026-03-17"]
+  },
+  "stats": {
+    "total_entries": 1,
+    "total_entities": 7,
+    "total_relationships": 3,
+    "by_type": {
+      "document": 1,
+      "transcript": 0,
+      "conversation": 0
+    },
+    "last_ingestion": "2026-03-17T16:21:36Z"
+  }
+}

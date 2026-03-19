@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-03-19T00:00:00Z",
+  "description": "OpenClaw Prompt Library - Versioned, cataloged prompts for AI workflows",
+  "categories": {
+    "extraction": {
+      "description": "Extract structured data from unstructured content",
+      "prompts": ["extraction/video-transcript-v1"]
+    },
+    "summarization": {
+      "description": "Condense content while preserving key information",
+      "prompts": ["summarization/slack-thread-v2"]
+    },
+    "analysis": {
+      "description": "Deep analysis and evaluation of content",
+      "prompts": []
+    },
+    "transformation": {
+      "description": "Convert content between formats",
+      "prompts": []
+    }
+  },
+  "prompts": [
+    {
+      "id": "extraction/video-transcript-v1",
+      "name": "video-transcript-extraction",
+      "version": 1,
+      "path": "extraction/video-transcript-v1.md",
+      "category": "extraction",
+      "status": "active",
+      "created_at": "2026-03-19T00:00:00Z",
+      "tags": ["video", "transcript", "extraction"],
+      "usage_stats": {
+        "total_uses": 0,
+        "success_rate": null,
+        "last_used": null
+      }
+    },
+    {
+      "id": "summarization/slack-thread-v2",
+      "name": "slack-thread-summarization",
+      "version": 2,
+      "path": "summarization/slack-thread-v2.md",
+      "category": "summarization",
+      "status": "active",
+      "created_at": "2026-03-19T00:00:00Z",
+      "tags": ["slack", "thread", "summarization", "action-items"],
+      "usage_stats": {
+        "total_uses": 0,
+        "success_rate": null,
+        "last_used": null
+      }
+    }
+  ],
+  "stats": {
+    "total_prompts": 2,
+    "by_category": {
+      "extraction": 1,
+      "summarization": 1,
+      "analysis": 0,
+      "transformation": 0
+    },
+    "by_status": {
+      "active": 2,
+      "deprecated": 0,
+      "draft": 0
+    }
+  }
+}

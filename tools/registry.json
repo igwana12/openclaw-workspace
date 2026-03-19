@@ -1,0 +1,238 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-03-19T00:00:00Z",
+  "description": "OpenClaw Tools Registry - Catalog of all available tools, MCP servers, and their usage patterns",
+  "tools": [
+    {
+      "id": "bash",
+      "type": "builtin",
+      "name": "Bash",
+      "description": "Execute bash commands in the terminal",
+      "category": "system",
+      "when_to_use": [
+        "Running git commands",
+        "Installing dependencies (npm, pip, etc.)",
+        "Executing scripts",
+        "System operations that require shell"
+      ],
+      "when_not_to_use": [
+        "Reading file contents (use Read)",
+        "Searching file contents (use Grep)",
+        "Finding files by pattern (use Glob)",
+        "Writing files (use Write)",
+        "Editing files (use Edit)"
+      ],
+      "prompts_using": [],
+      "skills_using": ["session-start-hook"]
+    },
+    {
+      "id": "read",
+      "type": "builtin",
+      "name": "Read",
+      "description": "Read file contents from the filesystem",
+      "category": "filesystem",
+      "when_to_use": [
+        "Reading source code files",
+        "Reading configuration files",
+        "Viewing images or PDFs",
+        "Reading Jupyter notebooks"
+      ],
+      "when_not_to_use": [
+        "Searching for patterns (use Grep)",
+        "Listing directories (use Bash ls)"
+      ],
+      "prompts_using": ["extraction/video-transcript-v1"],
+      "skills_using": []
+    },
+    {
+      "id": "write",
+      "type": "builtin",
+      "name": "Write",
+      "description": "Create or overwrite files",
+      "category": "filesystem",
+      "when_to_use": [
+        "Creating new files",
+        "Complete file rewrites"
+      ],
+      "when_not_to_use": [
+        "Modifying existing files (use Edit)",
+        "Small changes to large files (use Edit)"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    },
+    {
+      "id": "edit",
+      "type": "builtin",
+      "name": "Edit",
+      "description": "Make targeted edits to existing files",
+      "category": "filesystem",
+      "when_to_use": [
+        "Modifying specific sections of code",
+        "Updating configuration values",
+        "Refactoring existing code"
+      ],
+      "when_not_to_use": [
+        "Creating new files (use Write)",
+        "Complete file rewrites (use Write)"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    },
+    {
+      "id": "glob",
+      "type": "builtin",
+      "name": "Glob",
+      "description": "Find files by pattern matching",
+      "category": "search",
+      "when_to_use": [
+        "Finding files by name pattern",
+        "Listing files of a specific type",
+        "Discovering project structure"
+      ],
+      "when_not_to_use": [
+        "Searching file contents (use Grep)"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    },
+    {
+      "id": "grep",
+      "type": "builtin",
+      "name": "Grep",
+      "description": "Search file contents with regex",
+      "category": "search",
+      "when_to_use": [
+        "Finding code patterns",
+        "Searching for function definitions",
+        "Finding string occurrences across files"
+      ],
+      "when_not_to_use": [
+        "Finding files by name (use Glob)"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    },
+    {
+      "id": "agent",
+      "type": "builtin",
+      "name": "Agent",
+      "description": "Launch specialized subagents for complex tasks",
+      "category": "orchestration",
+      "when_to_use": [
+        "Complex multi-step research",
+        "Deep codebase exploration",
+        "Parallel independent tasks",
+        "Planning implementations"
+      ],
+      "when_not_to_use": [
+        "Simple file reads",
+        "Direct searches with known patterns",
+        "Tasks that can be done in 1-2 tool calls"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    },
+    {
+      "id": "webfetch",
+      "type": "builtin",
+      "name": "WebFetch",
+      "description": "Fetch and process web content",
+      "category": "web",
+      "when_to_use": [
+        "Fetching public web pages",
+        "Reading documentation",
+        "Extracting content from URLs"
+      ],
+      "when_not_to_use": [
+        "Authenticated services (use MCP)",
+        "GitHub content (use gh CLI)"
+      ],
+      "prompts_using": ["extraction/video-transcript-v1"],
+      "skills_using": []
+    },
+    {
+      "id": "websearch",
+      "type": "builtin",
+      "name": "WebSearch",
+      "description": "Search the web for information",
+      "category": "web",
+      "when_to_use": [
+        "Finding current information",
+        "Researching topics beyond training data",
+        "Looking up documentation"
+      ],
+      "when_not_to_use": [
+        "Searching local codebase (use Grep/Glob)"
+      ],
+      "prompts_using": [],
+      "skills_using": []
+    }
+  ],
+  "mcp_servers": {
+    "configured": [],
+    "available": [
+      {
+        "id": "slack-mcp",
+        "name": "@anthropics/slack-mcp",
+        "description": "Interact with Slack workspaces",
+        "category": "communication",
+        "setup_required": ["SLACK_BOT_TOKEN", "SLACK_TEAM_ID"],
+        "when_to_use": [
+          "Reading Slack messages",
+          "Posting to Slack channels",
+          "Searching Slack history"
+        ],
+        "prompts_using": ["extraction/slack-thread-v1", "summarization/slack-thread-v2"]
+      },
+      {
+        "id": "github-mcp",
+        "name": "@anthropics/github-mcp",
+        "description": "GitHub repository operations",
+        "category": "development",
+        "setup_required": ["GITHUB_TOKEN"],
+        "when_to_use": [
+          "Managing issues and PRs",
+          "Repository operations",
+          "Code review workflows"
+        ],
+        "prompts_using": []
+      }
+    ]
+  },
+  "categories": {
+    "system": {
+      "description": "System-level operations",
+      "tools": ["bash"]
+    },
+    "filesystem": {
+      "description": "File and directory operations",
+      "tools": ["read", "write", "edit"]
+    },
+    "search": {
+      "description": "Finding files and content",
+      "tools": ["glob", "grep"]
+    },
+    "web": {
+      "description": "Web interaction tools",
+      "tools": ["webfetch", "websearch"]
+    },
+    "orchestration": {
+      "description": "Task coordination and delegation",
+      "tools": ["agent"]
+    },
+    "communication": {
+      "description": "External communication",
+      "mcp_servers": ["slack-mcp"]
+    },
+    "development": {
+      "description": "Development workflows",
+      "mcp_servers": ["github-mcp"]
+    }
+  },
+  "stats": {
+    "total_builtin_tools": 9,
+    "total_mcp_configured": 0,
+    "total_mcp_available": 2
+  }
+}
