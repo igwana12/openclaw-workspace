@@ -1,7 +1,18 @@
 {
-  "version": "1.0.0",
-  "updated_at": "2026-03-19T00:00:00Z",
+  "version": "1.1.0",
+  "updated_at": "2026-03-19T12:00:00Z",
   "description": "OpenClaw Knowledge Base - Unified registry of ingested content, entities, and relationships",
+  "external_drives": {
+    "extreme_pro": {
+      "device": "Extreme Pro",
+      "format": "ExFAT",
+      "capacity": "4 TB",
+      "used": "2.34 TB",
+      "mount_point": "/Volumes/Extreme Pro",
+      "status": "cataloged",
+      "cataloged_at": "2026-03-19T12:00:00Z"
+    }
+  },
   "sources": {
     "ingested": [
       {
@@ -11,23 +22,299 @@
         "source_file": "TIMON-CAPITAL-ANALYSIS.md",
         "ingested_at": "2026-03-17T16:21:36Z",
         "ingestion_method": "manual",
-        "entities_extracted": [
-          "timon-capital",
-          "brighton",
-          "waza",
-          "omnibiz"
-        ],
-        "topics": [
-          "finance",
-          "venture-capital",
-          "portfolio-management",
-          "capital-returns"
-        ],
+        "entities_extracted": ["timon-capital", "brighton", "waza", "omnibiz"],
+        "topics": ["finance", "venture-capital", "portfolio-management", "capital-returns"],
         "tags": ["vc", "portfolio", "lp-communication"]
       }
     ],
     "generated": [],
     "curated": []
+  },
+  "extreme_pro_inventory": {
+    "description": "Full catalog of content on the Extreme Pro 4TB drive",
+    "top_level_directories": {
+      "ACTIVE": {
+        "type": "projects",
+        "bucket": "systems",
+        "asset": "projects_workflows",
+        "description": "Active development projects",
+        "projects": [
+          {
+            "id": "book-injestor",
+            "type": "tool",
+            "description": "Book content ingestion pipeline",
+            "category": "content-ingestion"
+          },
+          {
+            "id": "claude-connect",
+            "type": "tool",
+            "description": "Claude API integration tool",
+            "category": "ai-integration"
+          },
+          {
+            "id": "control-panels",
+            "type": "tool",
+            "description": "Dashboard/control panel interfaces",
+            "category": "ui"
+          },
+          {
+            "id": "jarvis",
+            "type": "tool",
+            "description": "AI assistant system",
+            "category": "ai-assistant"
+          },
+          {
+            "id": "kubera",
+            "type": "tool",
+            "description": "Financial/wealth management tool",
+            "category": "finance"
+          },
+          {
+            "id": "llm-council",
+            "type": "tool",
+            "description": "Multi-LLM deliberation system",
+            "category": "ai-orchestration"
+          },
+          {
+            "id": "llm-router",
+            "type": "tool",
+            "description": "LLM request routing system",
+            "category": "ai-orchestration"
+          },
+          {
+            "id": "mobile-specialist",
+            "type": "tool",
+            "description": "Mobile development specialist",
+            "category": "development"
+          },
+          {
+            "id": "new-tools",
+            "type": "tool",
+            "description": "Experimental new tools",
+            "category": "experimental"
+          },
+          {
+            "id": "openclaw",
+            "type": "tool",
+            "description": "Core OpenClaw AI operating system",
+            "category": "ai-os"
+          },
+          {
+            "id": "pantheon-training-data",
+            "type": "data",
+            "description": "Training data for Pantheon system",
+            "category": "ai-training"
+          },
+          {
+            "id": "psychedelic-journeys",
+            "type": "content",
+            "description": "Psychedelic journey content project",
+            "category": "content-creation"
+          },
+          {
+            "id": "sacred-circuits-empire",
+            "type": "project",
+            "description": "Sacred Circuits media empire project",
+            "category": "media"
+          },
+          {
+            "id": "sacred-circuits-pipeline",
+            "type": "tool",
+            "description": "Sacred Circuits content pipeline v1",
+            "category": "content-pipeline"
+          },
+          {
+            "id": "sacred-circuits-pipeline-v2",
+            "type": "tool",
+            "description": "Sacred Circuits content pipeline v2",
+            "category": "content-pipeline"
+          },
+          {
+            "id": "skill-maker",
+            "type": "tool",
+            "description": "Automated skill file generator",
+            "category": "ai-os"
+          },
+          {
+            "id": "smithers",
+            "type": "tool",
+            "description": "AI butler/assistant system",
+            "category": "ai-assistant"
+          },
+          {
+            "id": "storyboard-generator",
+            "type": "tool",
+            "description": "Visual storyboard generation app",
+            "category": "content-creation"
+          },
+          {
+            "id": "the-codemonkey",
+            "type": "tool",
+            "description": "Code generation/development assistant",
+            "category": "development"
+          },
+          {
+            "id": "the-resourcerer",
+            "type": "tool",
+            "description": "Resource discovery and management",
+            "category": "research"
+          },
+          {
+            "id": "the-sacred-child",
+            "type": "content",
+            "description": "Sacred child content project",
+            "category": "content-creation"
+          },
+          {
+            "id": "timon-capital-data",
+            "type": "data",
+            "description": "Timon Capital financial data",
+            "category": "finance"
+          },
+          {
+            "id": "video-injestor",
+            "type": "tool",
+            "description": "Video content ingestion pipeline",
+            "category": "content-ingestion"
+          }
+        ]
+      },
+      "AI_WORKSPACE": {
+        "type": "workspace",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "AI development workspace and configurations"
+      },
+      "API_KEYS": {
+        "type": "config",
+        "bucket": "systems",
+        "asset": "tools_registry",
+        "description": "API key storage (sensitive)",
+        "sensitive": true
+      },
+      "ARCHIVE": {
+        "type": "archive",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Archived projects and content"
+      },
+      "BEST PRACTICES": {
+        "type": "documentation",
+        "bucket": "process",
+        "asset": "playbooks",
+        "description": "Best practices documentation and guidelines"
+      },
+      "Book Injestor": {
+        "type": "tool",
+        "bucket": "systems",
+        "asset": "tools_registry",
+        "description": "Book ingestion tool (standalone copy)"
+      },
+      "CONFIG": {
+        "type": "config",
+        "bucket": "systems",
+        "asset": "tools_registry",
+        "description": "System configurations"
+      },
+      "CONTENT": {
+        "type": "content",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Content assets and media"
+      },
+      "DATA": {
+        "type": "data",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Raw data and datasets"
+      },
+      "DOCS": {
+        "type": "documentation",
+        "bucket": "process",
+        "asset": "sops",
+        "description": "Documentation and references"
+      },
+      "INFRASTRUCTURE": {
+        "type": "config",
+        "bucket": "systems",
+        "asset": "tools_registry",
+        "description": "Infrastructure configurations and scripts"
+      },
+      "Investments": {
+        "type": "data",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Investment data and analysis"
+      },
+      "MANUALS": {
+        "type": "documentation",
+        "bucket": "process",
+        "asset": "sops",
+        "description": "Operating manuals and guides"
+      },
+      "MIGRATION": {
+        "type": "config",
+        "bucket": "systems",
+        "asset": "projects_workflows",
+        "description": "Migration scripts and data"
+      },
+      "MYTHS": {
+        "type": "content",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Mythology and narrative content"
+      },
+      "OpenClaw": {
+        "type": "project",
+        "bucket": "systems",
+        "asset": "projects_workflows",
+        "description": "OpenClaw project files (standalone copy)"
+      },
+      "PANTHEON_LOGS": {
+        "type": "data",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Pantheon system logs"
+      },
+      "PANTHEON_OUTPUT": {
+        "type": "data",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Pantheon system output artifacts"
+      },
+      "RESOURCES": {
+        "type": "reference",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Reference materials and resources"
+      },
+      "Sacred Circuits Global Media Empire": {
+        "type": "project",
+        "bucket": "systems",
+        "asset": "projects_workflows",
+        "description": "Sacred Circuits media empire master project"
+      },
+      "sacred-circuits-outputs": {
+        "type": "data",
+        "bucket": "context",
+        "asset": "knowledge_base",
+        "description": "Sacred Circuits pipeline output artifacts"
+      },
+      "SKILLS": {
+        "type": "skills",
+        "bucket": "process",
+        "asset": "ai_sops",
+        "description": "AI skill files - the most critical directory for AI OS",
+        "priority": "high",
+        "note": "Contains reusable AI skill definitions - needs deep scan"
+      },
+      "video injestor": {
+        "type": "tool",
+        "bucket": "systems",
+        "asset": "tools_registry",
+        "description": "Video ingestion tool (standalone copy)"
+      }
+    }
   },
   "entities": {
     "companies": {
@@ -50,38 +337,63 @@
         {"id": "moic", "type": "metric"},
         {"id": "portfolio-management", "type": "strategy"}
       ]
+    },
+    "projects": {
+      "count": 23,
+      "source": "extreme_pro/ACTIVE",
+      "categories": {
+        "ai-orchestration": ["llm-council", "llm-router"],
+        "ai-assistant": ["jarvis", "smithers"],
+        "ai-os": ["openclaw", "skill-maker"],
+        "content-ingestion": ["book-injestor", "video-injestor"],
+        "content-pipeline": ["sacred-circuits-pipeline", "sacred-circuits-pipeline-v2"],
+        "content-creation": ["psychedelic-journeys", "storyboard-generator", "the-sacred-child"],
+        "development": ["mobile-specialist", "the-codemonkey"],
+        "finance": ["kubera", "timon-capital-data"],
+        "ai-integration": ["claude-connect"],
+        "ai-training": ["pantheon-training-data"],
+        "media": ["sacred-circuits-empire"],
+        "research": ["the-resourcerer"],
+        "ui": ["control-panels"],
+        "experimental": ["new-tools"]
+      }
     }
   },
   "relationships": [
-    {
-      "type": "portfolio_company",
-      "from": "timon-capital",
-      "to": "omnibiz"
-    },
-    {
-      "type": "portfolio_company",
-      "from": "timon-capital",
-      "to": "waza"
-    },
-    {
-      "type": "portfolio_company",
-      "from": "timon-capital",
-      "to": "brighton"
-    }
+    {"type": "portfolio_company", "from": "timon-capital", "to": "omnibiz"},
+    {"type": "portfolio_company", "from": "timon-capital", "to": "waza"},
+    {"type": "portfolio_company", "from": "timon-capital", "to": "brighton"},
+    {"type": "uses_pipeline", "from": "sacred-circuits-empire", "to": "sacred-circuits-pipeline-v2"},
+    {"type": "version_of", "from": "sacred-circuits-pipeline-v2", "to": "sacred-circuits-pipeline"},
+    {"type": "feeds_data", "from": "video-injestor", "to": "knowledge_base"},
+    {"type": "feeds_data", "from": "book-injestor", "to": "knowledge_base"},
+    {"type": "uses_tool", "from": "openclaw", "to": "skill-maker"},
+    {"type": "uses_tool", "from": "openclaw", "to": "llm-router"},
+    {"type": "financial_data", "from": "timon-capital-data", "to": "kubera"}
   ],
   "skill_mappings": {
     "financial-analysis": ["timon-capital-2026-03-17"],
-    "lp-communication": ["timon-capital-2026-03-17"]
+    "lp-communication": ["timon-capital-2026-03-17"],
+    "content-ingestion": ["video-injestor", "book-injestor"],
+    "ai-orchestration": ["llm-council", "llm-router"],
+    "skill-generation": ["skill-maker"]
   },
   "stats": {
     "total_entries": 1,
-    "total_entities": 7,
-    "total_relationships": 3,
+    "total_entities": 30,
+    "total_relationships": 10,
+    "total_drive_directories": 24,
+    "total_active_projects": 23,
     "by_type": {
       "document": 1,
       "transcript": 0,
       "conversation": 0
     },
-    "last_ingestion": "2026-03-17T16:21:36Z"
+    "by_bucket": {
+      "process": 4,
+      "context": 10,
+      "systems": 10
+    },
+    "last_ingestion": "2026-03-19T12:00:00Z"
   }
 }

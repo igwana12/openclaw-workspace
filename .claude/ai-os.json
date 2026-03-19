@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "OpenClaw AI OS",
   "description": "Personal AI operating system for knowledge work - based on the 3 Buckets, 7 Assets framework",
   "framework": {
@@ -14,18 +14,26 @@
         "playbooks": {
           "description": "High-level strategy (the what and why)",
           "path": null,
-          "status": "planned"
+          "extreme_pro_source": "/Volumes/Extreme Pro/BEST PRACTICES",
+          "status": "cataloged",
+          "note": "Best practices on Extreme Pro serve as playbooks"
         },
         "sops": {
           "description": "Step-by-step instructions for humans",
           "path": null,
-          "status": "planned"
+          "extreme_pro_sources": [
+            "/Volumes/Extreme Pro/DOCS",
+            "/Volumes/Extreme Pro/MANUALS"
+          ],
+          "status": "cataloged",
+          "note": "DOCS and MANUALS directories contain SOPs"
         },
         "ai_sops": {
           "description": "SOPs reformatted with granular detail for AI execution",
           "path": ".claude/skills/",
+          "extreme_pro_source": "/Volumes/Extreme Pro/SKILLS",
           "status": "active",
-          "note": "Skills serve as AI SOPs"
+          "note": "Skills serve as AI SOPs - SKILLS directory on Extreme Pro is primary source"
         }
       }
     },
@@ -36,13 +44,26 @@
           "description": "Reference documents and datasets AI tools need",
           "path": "knowledge/",
           "index": "knowledge/index.json",
+          "extreme_pro_sources": [
+            "/Volumes/Extreme Pro/AI_WORKSPACE",
+            "/Volumes/Extreme Pro/CONTENT",
+            "/Volumes/Extreme Pro/DATA",
+            "/Volumes/Extreme Pro/RESOURCES",
+            "/Volumes/Extreme Pro/Investments",
+            "/Volumes/Extreme Pro/MYTHS",
+            "/Volumes/Extreme Pro/PANTHEON_LOGS",
+            "/Volumes/Extreme Pro/PANTHEON_OUTPUT",
+            "/Volumes/Extreme Pro/sacred-circuits-outputs",
+            "/Volumes/Extreme Pro/ARCHIVE"
+          ],
           "status": "active"
         },
         "prompt_library": {
           "description": "Documented and versioned effective prompts",
           "path": "prompts/",
           "index": "prompts/index.json",
-          "status": "active"
+          "status": "active",
+          "note": "Check SKILLS directory on Extreme Pro for embedded prompts to extract"
         }
       }
     },
@@ -53,12 +74,20 @@
           "description": "Catalog of all tech in the stack",
           "path": "tools/",
           "index": "tools/registry.json",
+          "extreme_pro_sources": [
+            "/Volumes/Extreme Pro/CONFIG",
+            "/Volumes/Extreme Pro/INFRASTRUCTURE",
+            "/Volumes/Extreme Pro/API_KEYS"
+          ],
           "status": "active"
         },
         "projects_workflows": {
           "description": "Registry of live AI implementations and automations",
           "path": null,
-          "status": "planned"
+          "extreme_pro_source": "/Volumes/Extreme Pro/ACTIVE",
+          "status": "cataloged",
+          "project_count": 23,
+          "note": "23 active projects cataloged from Extreme Pro"
         }
       }
     }
@@ -71,13 +100,39 @@
   },
   "integrations": {
     "external_drives": {
-      "xtreme_pro": {
-        "status": "not_mounted",
-        "expected_content": ["skills", "prompts", "knowledge"],
-        "note": "Scan for existing content when mounted"
+      "extreme_pro": {
+        "status": "cataloged",
+        "device": "Extreme Pro",
+        "format": "ExFAT",
+        "capacity": "4 TB",
+        "used": "2.34 TB",
+        "mount_point": "/Volumes/Extreme Pro",
+        "cataloged_at": "2026-03-19T12:00:00Z",
+        "directories_mapped": 24,
+        "active_projects_found": 23,
+        "pending_deep_scan": [
+          "SKILLS - Need to enumerate individual skill files",
+          "BEST PRACTICES - Need to extract playbook content",
+          "DOCS/MANUALS - Need to catalog SOPs",
+          "AI_WORKSPACE - Need to map AI configurations"
+        ]
       }
     }
   },
+  "drive_to_bucket_mapping": {
+    "process_bucket": {
+      "playbooks": ["BEST PRACTICES"],
+      "sops": ["DOCS", "MANUALS"],
+      "ai_sops": ["SKILLS"]
+    },
+    "context_bucket": {
+      "knowledge_base": ["AI_WORKSPACE", "CONTENT", "DATA", "RESOURCES", "Investments", "MYTHS", "PANTHEON_LOGS", "PANTHEON_OUTPUT", "sacred-circuits-outputs", "ARCHIVE"]
+    },
+    "systems_bucket": {
+      "tools_registry": ["CONFIG", "INFRASTRUCTURE", "API_KEYS", "Book Injestor", "video injestor"],
+      "projects_workflows": ["ACTIVE", "OpenClaw", "Sacred Circuits Global Media Empire", "MIGRATION"]
+    }
+  },
   "created_at": "2026-03-19T00:00:00Z",
-  "updated_at": "2026-03-19T00:00:00Z"
+  "updated_at": "2026-03-19T12:00:00Z"
 }
