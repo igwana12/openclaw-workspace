@@ -32,7 +32,7 @@ We use this as our organizing principle. Current status:
 | **SOPs** (human instructions) | Partial | Slack threads, conversations |
 | **AI SOPs** (skills for Claude) | Active | Skill files (.md) in skills directories |
 | **Knowledge Base** (reference docs) | Growing | This workspace, `index.json` files |
-| **Prompt Library** (versioned prompts) | Not yet | TODO: `prompts/` directory |
+| **Prompt Library** (versioned prompts) | Active | `prompts/` directory |
 | **Tools Registry** (tech stack catalog) | Implicit | MCP configs, not centralized |
 | **Projects & Workflows** (live implementations) | Partial | Scattered across repos |
 
@@ -51,10 +51,11 @@ We use this as our organizing principle. Current status:
 | 2026-03-17 | Created Timon Capital analysis in workspace | Needed structured LP communication framework for Brighton return + Waza recovery |
 | 2026-03-19 | Adopted AI OS framework as organizing principle | Video from Thaddeus Demeke mapped cleanly to what we're already building — gives us a shared vocabulary and gap analysis |
 | 2026-03-19 | Created CLAUDE.md as single source of truth | Highest-leverage action: one file that orients every future Claude session on what this system is and how it works |
+| 2026-03-19 | Built `prompts/` directory with initial library | Extracted working prompts from Timon analysis: LP updates, scenario matrices, options analysis. Now versioned and reusable. |
 
 ## What's Next
 
-- [ ] Build `prompts/` directory — version prompts that work well so they survive across sessions
+- [x] Build `prompts/` directory — version prompts that work well so they survive across sessions
 - [ ] Centralize tools registry — one file listing all MCP servers, what they do, which skills use them
 - [ ] Formalize the skill creation workflow — when a task repeats 3+ times, it becomes a skill
 - [ ] Connect the decision log to Slack — decisions made in threads should flow back here
