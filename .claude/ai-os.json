@@ -31,9 +31,22 @@
         "ai_sops": {
           "description": "SOPs reformatted with granular detail for AI execution",
           "path": ".claude/skills/",
+          "index": ".claude/skills/skills-index.md",
+          "registry": "skills/registry.json",
           "extreme_pro_source": "/Volumes/Extreme Pro/SKILLS",
           "status": "active",
-          "note": "Skills serve as AI SOPs - SKILLS directory on Extreme Pro is primary source"
+          "skill_count": 38,
+          "skill_breakdown": {
+            "trading_production": 16,
+            "general_reference": 22,
+            "trading_agents": 5,
+            "trading_workflows": 1
+          },
+          "categories": [
+            ".claude/skills/trading/ (16 production trading skills)",
+            ".claude/skills/general/ (22 general-purpose skills)"
+          ],
+          "note": "All 38 skills cataloged from Extreme Pro SKILLS directory with stub files in .claude/skills/"
         }
       }
     },

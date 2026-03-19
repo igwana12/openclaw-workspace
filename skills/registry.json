@@ -1,0 +1,565 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-03-19T15:30:00Z",
+  "description": "OpenClaw Skills Registry - Complete catalog of all AI skills on the Extreme Pro drive",
+  "source": "/Volumes/Extreme Pro/SKILLS/",
+  "summary": {
+    "total_unique_skills": 38,
+    "total_skill_files": 38,
+    "total_reference_docs": 95,
+    "total_python_scripts": 15,
+    "total_agents": 5,
+    "directories_scanned": 6,
+    "empty_directories": ["anthropic", "business", "internals", "trading"],
+    "active_directories": ["trading-claude", "trading-plugins"]
+  },
+  "collections": {
+    "trading-claude": {
+      "description": "Production trading skills with Python automation scripts and Claude agents",
+      "source": "tradermonty-claude-trading-skills (GitHub)",
+      "path": "/Volumes/Extreme Pro/SKILLS/trading-claude/",
+      "status": "production",
+      "has_claude_md": true,
+      "has_agents": true,
+      "has_weekly_workflow": true,
+      "skill_count": 16,
+      "agent_count": 5,
+      "script_count": 15,
+      "zip_packages_available": true,
+      "skills": [
+        {
+          "id": "backtest-expert",
+          "name": "Backtest Expert",
+          "category": "trading/backtesting",
+          "skill_file": "backtest-expert/SKILL.md",
+          "references": ["failed_tests.md", "methodology.md"],
+          "scripts": [],
+          "description": "Expert system for backtesting trading strategies"
+        },
+        {
+          "id": "breadth-chart-analyst",
+          "name": "Breadth Chart Analyst",
+          "category": "trading/market-analysis",
+          "skill_file": "breadth-chart-analyst/SKILL.md",
+          "references": ["breadth_chart_methodology.md"],
+          "assets": ["breadth_analysis_template.md", "SP500_Breadth_Index_200MA_8MA.jpeg", "US_Stock_Market_Uptrend_Ratio.jpeg"],
+          "scripts": [],
+          "description": "Analyzes market breadth charts for trend confirmation",
+          "has_revision": true,
+          "revision": "docs/revisions/Breadth Chart Analyst Skill_IMPROVEMENTS_v2.0.md"
+        },
+        {
+          "id": "dividend-growth-pullback-screener",
+          "name": "Dividend Growth Pullback Screener",
+          "category": "trading/screening",
+          "skill_file": "dividend-growth-pullback-screener/SKILL.md",
+          "references": ["dividend_growth_compounding.md", "fmp_api_guide.md", "rsi_oversold_strategy.md"],
+          "scripts": ["screen_dividend_growth_rsi.py"],
+          "api_dependency": "FMP (Financial Modeling Prep)",
+          "description": "Screens for dividend growth stocks at RSI pullback levels"
+        },
+        {
+          "id": "earnings-calendar",
+          "name": "Earnings Calendar",
+          "category": "trading/data-fetching",
+          "skill_file": "earnings-calendar/SKILL.md",
+          "references": ["fmp_api_guide.md"],
+          "assets": ["earnings_report_template.md"],
+          "scripts": ["fetch_earnings_fmp.py", "generate_report.py"],
+          "api_dependency": "FMP",
+          "description": "Fetches and formats upcoming earnings calendar data"
+        },
+        {
+          "id": "economic-calendar-fetcher",
+          "name": "Economic Calendar Fetcher",
+          "category": "trading/data-fetching",
+          "skill_file": "economic-calendar-fetcher/SKILL.md",
+          "references": ["fmp_api_documentation.md"],
+          "scripts": ["get_economic_calendar.py"],
+          "api_dependency": "FMP",
+          "description": "Fetches economic calendar events and indicators"
+        },
+        {
+          "id": "institutional-flow-tracker",
+          "name": "Institutional Flow Tracker",
+          "category": "trading/flow-analysis",
+          "skill_file": "institutional-flow-tracker/SKILL.md",
+          "references": ["13f_filings_guide.md", "institutional_investor_types.md", "interpretation_framework.md"],
+          "scripts": ["analyze_single_stock.py", "track_institution_portfolio.py", "track_institutional_flow.py"],
+          "description": "Tracks institutional money flows via 13F filings"
+        },
+        {
+          "id": "market-environment-analysis",
+          "name": "Market Environment Analysis",
+          "category": "trading/market-analysis",
+          "skill_file": "market-environment-analysis/SKILL.md",
+          "references": ["analysis_patterns.md", "indicators.md"],
+          "scripts": ["market_utils.py"],
+          "description": "Comprehensive market environment assessment"
+        },
+        {
+          "id": "market-news-analyst",
+          "name": "Market News Analyst",
+          "category": "trading/news-analysis",
+          "skill_file": "market-news-analyst/SKILL.md",
+          "references": ["corporate_news_impact.md", "geopolitical_commodity_correlations.md", "market_event_patterns.md", "trusted_news_sources.md"],
+          "scripts": [],
+          "description": "Analyzes market news for trading impact"
+        },
+        {
+          "id": "options-strategy-advisor",
+          "name": "Options Strategy Advisor",
+          "category": "trading/options",
+          "skill_file": "options-strategy-advisor/SKILL.md",
+          "scripts": ["black_scholes.py"],
+          "description": "Advises on options strategies with Black-Scholes pricing"
+        },
+        {
+          "id": "pair-trade-screener",
+          "name": "Pair Trade Screener",
+          "category": "trading/screening",
+          "skill_file": "pair-trade-screener/SKILL.md",
+          "references": ["cointegration_guide.md", "methodology.md"],
+          "scripts": ["analyze_spread.py", "find_pairs.py"],
+          "description": "Screens for cointegrated pairs for pairs trading"
+        },
+        {
+          "id": "portfolio-manager",
+          "name": "Portfolio Manager",
+          "category": "trading/portfolio",
+          "skill_file": "portfolio-manager/SKILL.md",
+          "references": ["alpaca-mcp-setup.md", "asset-allocation.md", "diversification-principles.md", "portfolio-risk-metrics.md", "position-evaluation.md", "rebalancing-strategies.md", "risk-profile-questionnaire.md", "target-allocations.md"],
+          "scripts": ["test_alpaca_connection.py"],
+          "api_dependency": "Alpaca",
+          "description": "Full portfolio management with Alpaca MCP integration",
+          "reference_count": 8,
+          "note": "Most comprehensive skill - 8 reference docs"
+        },
+        {
+          "id": "sector-analyst",
+          "name": "Sector Analyst",
+          "category": "trading/sector-analysis",
+          "skill_file": "sector-analyst/SKILL.md",
+          "references": ["sector_rotation.md"],
+          "assets": ["sector_performance.jpeg", "industory_performance_1.jpeg", "industory_performance_2.jpeg"],
+          "scripts": [],
+          "description": "Sector rotation analysis with visual chart reading"
+        },
+        {
+          "id": "stanley-druckenmiller-investment",
+          "name": "Stanley Druckenmiller Investment",
+          "category": "trading/strategy",
+          "skill_file": "stanley-druckenmiller-investment/SKILL.md",
+          "references": ["investment-philosophy.md", "case-studies.md", "market-analysis-guide.md"],
+          "scripts": [],
+          "description": "Investment analysis using Druckenmiller's methodology"
+        },
+        {
+          "id": "technical-analyst",
+          "name": "Technical Analyst",
+          "category": "trading/technical-analysis",
+          "skill_file": "technical-analyst/SKILL.md",
+          "references": ["technical_analysis_framework.md"],
+          "assets": ["analysis_template.md"],
+          "scripts": [],
+          "description": "Technical chart analysis with standardized templates"
+        },
+        {
+          "id": "us-market-bubble-detector",
+          "name": "US Market Bubble Detector",
+          "category": "trading/risk-analysis",
+          "skill_file": "us-market-bubble-detector/SKILL.md",
+          "references": ["bubble_framework.md", "historical_cases.md", "implementation_guide.md", "quick_reference.md", "quick_reference_en.md"],
+          "scripts": ["bubble_scorer.py"],
+          "has_changelog": true,
+          "has_revision": true,
+          "revision": "docs/revisions/bubble-detector-v2.0-revision.md",
+          "description": "Detects bubble conditions in US equity markets"
+        },
+        {
+          "id": "us-stock-analysis",
+          "name": "US Stock Analysis",
+          "category": "trading/stock-analysis",
+          "skill_file": "us-stock-analysis/SKILL.md",
+          "references": ["financial-metrics.md", "fundamental-analysis.md", "report-template.md", "technical-analysis.md"],
+          "scripts": [],
+          "description": "Comprehensive US stock fundamental + technical analysis"
+        },
+        {
+          "id": "value-dividend-screener",
+          "name": "Value Dividend Screener",
+          "category": "trading/screening",
+          "skill_file": "value-dividend-screener/SKILL.md",
+          "references": ["screening_methodology.md", "fmp_api_guide.md"],
+          "scripts": ["screen_dividend_stocks.py"],
+          "api_dependency": "FMP",
+          "description": "Screens for undervalued dividend stocks"
+        }
+      ],
+      "agents": [
+        {
+          "id": "druckenmiller-strategy-planner",
+          "name": "Druckenmiller Strategy Planner",
+          "path": "weekly-trade-strategy/.claude/agents/druckenmiller-strategy-planner.md",
+          "uses_skills": ["stanley-druckenmiller-investment"],
+          "description": "Plans weekly strategy using Druckenmiller methodology"
+        },
+        {
+          "id": "market-news-analyzer",
+          "name": "Market News Analyzer",
+          "path": "weekly-trade-strategy/.claude/agents/market-news-analyzer.md",
+          "uses_skills": ["market-news-analyst"],
+          "description": "Analyzes market news for weekly strategy"
+        },
+        {
+          "id": "technical-market-analyst",
+          "name": "Technical Market Analyst",
+          "path": "weekly-trade-strategy/.claude/agents/technical-market-analyst.md",
+          "uses_skills": ["technical-analyst", "breadth-chart-analyst"],
+          "description": "Technical analysis agent for market assessment"
+        },
+        {
+          "id": "us-market-analyst",
+          "name": "US Market Analyst",
+          "path": "weekly-trade-strategy/.claude/agents/us-market-analyst.md",
+          "uses_skills": ["us-market-bubble-detector", "market-environment-analysis"],
+          "description": "Comprehensive US market analysis agent"
+        },
+        {
+          "id": "weekly-trade-blog-writer",
+          "name": "Weekly Trade Blog Writer",
+          "path": "weekly-trade-strategy/.claude/agents/weekly-trade-blog-writer.md",
+          "uses_skills": ["all"],
+          "description": "Generates weekly trade strategy blog posts (Japanese)",
+          "output_language": "Japanese"
+        }
+      ],
+      "workflows": {
+        "weekly-trade-strategy": {
+          "description": "End-to-end weekly trading strategy workflow",
+          "path": "weekly-trade-strategy/",
+          "has_claude_md": true,
+          "skills_used": [
+            "breadth-chart-analyst",
+            "earnings-calendar",
+            "economic-calendar-fetcher",
+            "market-environment-analysis",
+            "market-news-analyst",
+            "sector-analyst",
+            "stanley-druckenmiller-investment",
+            "technical-analyst",
+            "us-market-bubble-detector",
+            "us-stock-analysis"
+          ],
+          "agents_used": [
+            "druckenmiller-strategy-planner",
+            "market-news-analyzer",
+            "technical-market-analyst",
+            "us-market-analyst",
+            "weekly-trade-blog-writer"
+          ],
+          "outputs": {
+            "reports": "reports/{date}/*.md",
+            "blogs": "blogs/sample/*.md",
+            "charts": "charts/{date}/*.jpeg"
+          },
+          "sample_reports": [
+            "NDX_technical_analysis_2025-11-03.md",
+            "SPX_technical_analysis_2025-11-03.md",
+            "breadth_combined_analysis_2025-11-03.md",
+            "market-breadth-analysis.md",
+            "market-news-analysis.md",
+            "technical-market-analysis.md",
+            "us-market-analysis.md"
+          ]
+        }
+      },
+      "api_dependencies": {
+        "fmp": {
+          "name": "Financial Modeling Prep",
+          "used_by": ["dividend-growth-pullback-screener", "earnings-calendar", "economic-calendar-fetcher", "value-dividend-screener"],
+          "note": "Requires FMP_API_KEY"
+        },
+        "alpaca": {
+          "name": "Alpaca Trading API",
+          "used_by": ["portfolio-manager"],
+          "note": "Requires Alpaca MCP server setup"
+        }
+      }
+    },
+    "trading-plugins": {
+      "description": "External skill plugin collections from GitHub",
+      "path": "/Volumes/Extreme Pro/SKILLS/trading-plugins/",
+      "status": "reference",
+      "sub_collections": {
+        "jamesrochabrun-skills": {
+          "source": "GitHub: jamesrochabrun",
+          "path": "trading-plugins/jamesrochabrun-skills/",
+          "has_marketplace_json": true,
+          "has_plugin_json": true,
+          "skill_count": 22,
+          "skills": [
+            {
+              "id": "anthropic-architect",
+              "category": "ai/architecture",
+              "references": ["architectural_patterns.md", "best_practices.md", "decision_rubric.md", "use_case_examples.md"],
+              "description": "Design architectural decisions for AI systems"
+            },
+            {
+              "id": "anthropic-prompt-engineer",
+              "category": "ai/prompting",
+              "references": ["advanced_techniques.md", "claude_4_best_practices.md", "common_mistakes.md", "core_techniques.md", "prompt_templates.md"],
+              "description": "Expert prompt engineering for Claude/Anthropic models"
+            },
+            {
+              "id": "apple-hig-designer",
+              "category": "design/ios",
+              "references": ["accessibility.md", "colors.md", "components.md", "layout_spacing.md", "typography.md"],
+              "description": "Apple Human Interface Guidelines design specialist"
+            },
+            {
+              "id": "book-illustrator",
+              "category": "content/visual",
+              "references": ["character_design.md", "color_theory.md", "composition.md", "illustration_styles.md"],
+              "description": "Book illustration design and direction"
+            },
+            {
+              "id": "content-brief-generator",
+              "category": "content/marketing",
+              "references": ["content_frameworks.md", "seo_guidelines.md", "tone_voice_guide.md"],
+              "description": "Generate content briefs for marketing"
+            },
+            {
+              "id": "design-brief-generator",
+              "category": "design/ux",
+              "references": ["accessibility_guidelines.md", "design_brief_template.md", "design_principles.md", "user_research_methods.md"],
+              "description": "Generate UX/UI design briefs"
+            },
+            {
+              "id": "engineer-expertise-extractor",
+              "category": "meta/skills",
+              "references": [],
+              "description": "Extract expertise from engineers to create skills"
+            },
+            {
+              "id": "engineer-skill-creator",
+              "category": "meta/skills",
+              "references": [],
+              "description": "Create new skills from engineering knowledge"
+            },
+            {
+              "id": "frontend-designer",
+              "category": "development/ui",
+              "references": ["accessibility_checklist.md", "component_library.md", "design_tokens.md", "responsive_patterns.md"],
+              "description": "Frontend design implementation specialist"
+            },
+            {
+              "id": "git-worktrees",
+              "category": "development/git",
+              "references": ["slash_command_template.md", "best_practices.md", "worktree_commands.md"],
+              "description": "Git worktree management and parallel development"
+            },
+            {
+              "id": "kids-book-writer",
+              "category": "content/writing",
+              "references": ["bestseller_elements.md", "age_guidelines.md", "rhyming_techniques.md", "story_structures.md", "values_themes.md"],
+              "description": "Children's book writing with age-appropriate content"
+            },
+            {
+              "id": "leetcode-teacher",
+              "category": "education/cs",
+              "references": ["data_structures.md", "patterns.md"],
+              "description": "LeetCode problem-solving instruction"
+            },
+            {
+              "id": "llm-router",
+              "category": "ai/orchestration",
+              "references": ["providers.md"],
+              "description": "Route queries to optimal LLM providers"
+            },
+            {
+              "id": "math-teacher",
+              "category": "education/math",
+              "references": ["algebra.md", "basic_math.md", "calculus.md", "gamification.md"],
+              "description": "Math instruction with gamification"
+            },
+            {
+              "id": "openai-prompt-engineer",
+              "category": "ai/prompting",
+              "references": ["claude_techniques.md", "gpt5_techniques.md", "optimization_strategies.md", "prompt_patterns.md"],
+              "description": "Prompt engineering for OpenAI/GPT models"
+            },
+            {
+              "id": "prd-generator",
+              "category": "product/planning",
+              "references": ["metrics_frameworks.md", "prd_template.md", "user_story_examples.md"],
+              "description": "Generate product requirement documents"
+            },
+            {
+              "id": "qa-test-planner",
+              "category": "development/qa",
+              "references": ["figma_validation.md", "regression_testing.md"],
+              "description": "QA test planning and regression strategy"
+            },
+            {
+              "id": "query-expert",
+              "category": "development/database",
+              "references": ["indexing.md", "nosql_queries.md", "optimization.md", "sql_patterns.md"],
+              "description": "SQL/NoSQL query optimization expert"
+            },
+            {
+              "id": "reading-teacher",
+              "category": "education/reading",
+              "references": ["comprehension.md", "phonics.md", "sight_words.md"],
+              "description": "Reading instruction for children"
+            },
+            {
+              "id": "technical-launch-planner",
+              "category": "product/launch",
+              "references": ["developer_enablement.md", "launch_messaging.md", "launch_tiers.md", "metrics_frameworks.md"],
+              "description": "Technical product launch planning"
+            },
+            {
+              "id": "trading-plan-generator",
+              "category": "trading/strategy",
+              "references": ["trading_psychology.md", "risk_management.md"],
+              "description": "Generate comprehensive trading plans"
+            }
+          ]
+        },
+        "tradermonty-claude-trading-skills": {
+          "source": "GitHub: tradermonty",
+          "path": "trading-plugins/tradermonty-claude-trading-skills/",
+          "status": "source_for_trading-claude",
+          "note": "This is the upstream source - trading-claude/ is the deployed copy",
+          "skill_count": 16,
+          "skills_same_as": "trading-claude"
+        }
+      }
+    },
+    "placeholder_directories": {
+      "anthropic": {
+        "path": "/Volumes/Extreme Pro/SKILLS/anthropic/",
+        "status": "empty",
+        "intended_use": "Anthropic-specific skills and configurations"
+      },
+      "business": {
+        "path": "/Volumes/Extreme Pro/SKILLS/business/",
+        "status": "empty",
+        "intended_use": "Business operation skills and playbooks"
+      },
+      "internals": {
+        "path": "/Volumes/Extreme Pro/SKILLS/internals/",
+        "status": "empty",
+        "intended_use": "Internal tooling and system skills"
+      },
+      "trading": {
+        "path": "/Volumes/Extreme Pro/SKILLS/trading/",
+        "status": "empty",
+        "intended_use": "General trading skills (non-Claude specific)"
+      }
+    }
+  },
+  "all_python_scripts": [
+    {"skill": "dividend-growth-pullback-screener", "script": "screen_dividend_growth_rsi.py", "purpose": "Screen for dividend growth stocks at RSI oversold levels"},
+    {"skill": "earnings-calendar", "script": "fetch_earnings_fmp.py", "purpose": "Fetch earnings data from FMP API"},
+    {"skill": "earnings-calendar", "script": "generate_report.py", "purpose": "Generate earnings calendar report"},
+    {"skill": "economic-calendar-fetcher", "script": "get_economic_calendar.py", "purpose": "Fetch economic calendar from FMP API"},
+    {"skill": "institutional-flow-tracker", "script": "analyze_single_stock.py", "purpose": "Analyze institutional ownership of a single stock"},
+    {"skill": "institutional-flow-tracker", "script": "track_institution_portfolio.py", "purpose": "Track a specific institution's portfolio changes"},
+    {"skill": "institutional-flow-tracker", "script": "track_institutional_flow.py", "purpose": "Track overall institutional money flows"},
+    {"skill": "market-environment-analysis", "script": "market_utils.py", "purpose": "Market analysis utility functions"},
+    {"skill": "options-strategy-advisor", "script": "black_scholes.py", "purpose": "Black-Scholes option pricing calculations"},
+    {"skill": "pair-trade-screener", "script": "analyze_spread.py", "purpose": "Analyze spread between paired assets"},
+    {"skill": "pair-trade-screener", "script": "find_pairs.py", "purpose": "Find cointegrated pairs for trading"},
+    {"skill": "portfolio-manager", "script": "test_alpaca_connection.py", "purpose": "Test Alpaca API connection"},
+    {"skill": "us-market-bubble-detector", "script": "bubble_scorer.py", "purpose": "Score current market bubble conditions"},
+    {"skill": "value-dividend-screener", "script": "screen_dividend_stocks.py", "purpose": "Screen for undervalued dividend stocks"}
+  ],
+  "skills_by_category": {
+    "trading/market-analysis": ["breadth-chart-analyst", "market-environment-analysis"],
+    "trading/screening": ["dividend-growth-pullback-screener", "pair-trade-screener", "value-dividend-screener"],
+    "trading/data-fetching": ["earnings-calendar", "economic-calendar-fetcher"],
+    "trading/flow-analysis": ["institutional-flow-tracker"],
+    "trading/news-analysis": ["market-news-analyst"],
+    "trading/options": ["options-strategy-advisor"],
+    "trading/portfolio": ["portfolio-manager"],
+    "trading/sector-analysis": ["sector-analyst"],
+    "trading/strategy": ["stanley-druckenmiller-investment", "trading-plan-generator"],
+    "trading/technical-analysis": ["technical-analyst"],
+    "trading/risk-analysis": ["us-market-bubble-detector"],
+    "trading/stock-analysis": ["us-stock-analysis"],
+    "trading/backtesting": ["backtest-expert"],
+    "ai/architecture": ["anthropic-architect"],
+    "ai/prompting": ["anthropic-prompt-engineer", "openai-prompt-engineer"],
+    "ai/orchestration": ["llm-router"],
+    "design/ios": ["apple-hig-designer"],
+    "design/ux": ["design-brief-generator"],
+    "content/visual": ["book-illustrator"],
+    "content/marketing": ["content-brief-generator"],
+    "content/writing": ["kids-book-writer"],
+    "development/ui": ["frontend-designer"],
+    "development/git": ["git-worktrees"],
+    "development/qa": ["qa-test-planner"],
+    "development/database": ["query-expert"],
+    "education/cs": ["leetcode-teacher"],
+    "education/math": ["math-teacher"],
+    "education/reading": ["reading-teacher"],
+    "product/planning": ["prd-generator"],
+    "product/launch": ["technical-launch-planner"],
+    "meta/skills": ["engineer-expertise-extractor", "engineer-skill-creator"]
+  },
+  "high_value_skills_for_openclaw": {
+    "description": "Skills most relevant to the OpenClaw AI OS project",
+    "immediate_use": [
+      {
+        "id": "anthropic-prompt-engineer",
+        "reason": "Directly applicable to improving OpenClaw's prompt library"
+      },
+      {
+        "id": "anthropic-architect",
+        "reason": "Architecture patterns for AI system design"
+      },
+      {
+        "id": "engineer-skill-creator",
+        "reason": "Meta-skill for creating new skills - feeds skill-maker tool"
+      },
+      {
+        "id": "engineer-expertise-extractor",
+        "reason": "Extract expertise into structured skills"
+      },
+      {
+        "id": "llm-router",
+        "reason": "Pairs with the llm-router tool in ACTIVE projects"
+      },
+      {
+        "id": "prd-generator",
+        "reason": "Useful for planning OpenClaw features"
+      }
+    ],
+    "content_pipeline": [
+      {
+        "id": "content-brief-generator",
+        "reason": "Feeds Sacred Circuits content pipeline"
+      },
+      {
+        "id": "kids-book-writer",
+        "reason": "Pairs with book-injestor and storyboard-generator"
+      },
+      {
+        "id": "book-illustrator",
+        "reason": "Visual direction for book projects"
+      }
+    ],
+    "trading_ops": [
+      {
+        "id": "portfolio-manager",
+        "reason": "Full portfolio management via Alpaca - pairs with kubera"
+      },
+      {
+        "id": "weekly-trade-strategy (workflow)",
+        "reason": "Complete end-to-end automated trading analysis workflow"
+      }
+    ]
+  }
+}
