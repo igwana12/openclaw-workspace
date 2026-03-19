@@ -25,6 +25,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+import anthropic
+
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
@@ -324,82 +326,279 @@ def save_baseline(baseline: Baseline):
 
 
 # ============================================================================
-# EXPERIMENT EXECUTION - STUBS TO WIRE
+# CLAUDE API CLIENT
 # ============================================================================
+
+def get_client() -> anthropic.Anthropic:
+    """Get Anthropic client. Reads API key from env or .env file."""
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+
+    if not api_key:
+        env_file = LEARNINGS_DIR.parent / ".env"
+        if env_file.exists():
+            for line in env_file.read_text().splitlines():
+                if line.startswith("ANTHROPIC_API_KEY="):
+                    api_key = line.split("=", 1)[1].strip().strip("'\"")
+                    break
+
+    if not api_key:
+        log_error("No ANTHROPIC_API_KEY found. Set it in environment or .env file.")
+        sys.exit(1)
+
+    return anthropic.Anthropic(api_key=api_key)
+
+
+# Token-to-cost estimate (Haiku pricing for cost efficiency)
+INPUT_COST_PER_MTOK = 0.25   # $/million input tokens
+OUTPUT_COST_PER_MTOK = 1.25  # $/million output tokens
+
+
+def estimate_cost(usage) -> float:
+    """Estimate cost from API usage object."""
+    input_cost = (usage.input_tokens / 1_000_000) * INPUT_COST_PER_MTOK
+    output_cost = (usage.output_tokens / 1_000_000) * OUTPUT_COST_PER_MTOK
+    return input_cost + output_cost
+
+
+# ============================================================================
+# EXPERIMENT EXECUTION - WIRED TO CLAUDE API
+# ============================================================================
+
+def load_skill_content(skill_name: str) -> str:
+    """Load the skill markdown file content."""
+    skill_file = SKILLS_DIR / f"{skill_name}.md"
+    if not skill_file.exists():
+        return f"[Skill file not found: {skill_file}]"
+    return skill_file.read_text()
+
+
+def load_eval_data(skill_name: str) -> dict:
+    """Load the full eval YAML data for a skill."""
+    eval_file = EVALS_DIR / f"{skill_name}.yaml"
+    if not eval_file.exists():
+        return {}
+    return yaml.safe_load(eval_file.read_text())
+
 
 def generate_variation(skill_name: str, variable: str) -> dict:
     """
-    STUB: Generate a variation of the skill by tweaking one variable.
+    Generate a variation of the skill by tweaking one variable via Claude API.
 
-    Wire this to actual LLM calls to generate variations.
-
-    Args:
-        skill_name: Name of the skill to vary
-        variable: The variable to tweak (e.g., "description", "system_prompt")
-
-    Returns:
-        dict with variation details
+    Reads the current skill file, asks Claude to improve the specified variable,
+    and returns the variation with a hypothesis for why it should improve KPIs.
     """
-    # TODO: Wire to Claude API
-    # Example structure:
-    # return {
-    #     "variation_id": generate_id("VAR"),
-    #     "variable": variable,
-    #     "original_value": "...",
-    #     "new_value": "...",
-    #     "hypothesis": "Why this might improve the KPI"
-    # }
+    variation_id = generate_id("VAR")
+    skill_content = load_skill_content(skill_name)
+    eval_data = load_eval_data(skill_name)
 
-    log_warning(f"generate_variation() is a stub - wire to LLM calls")
-    return {
-        "variation_id": generate_id("VAR"),
-        "variable": variable,
-        "original_value": "[STUB]",
-        "new_value": "[STUB]",
-        "hypothesis": "Stub variation - wire generate_variation() to LLM"
-    }
+    # Build context about what we're optimizing
+    test_prompts = eval_data.get("test_prompts", [])
+    activation_keywords = eval_data.get("activation_keywords", [])
+
+    prompt = f"""You are optimizing a Claude Code skill file. Your goal is to improve its {variable}.
+
+## Current Skill File ({skill_name}.md)
+```markdown
+{skill_content}
+```
+
+## Eval Context
+- Test prompts that should activate this skill: {json.dumps(test_prompts)}
+- Expected activation keywords: {json.dumps(activation_keywords)}
+
+## Variable to Optimize: {variable}
+
+## Rules
+- Change ONLY the {variable} - keep everything else the same
+- The change should improve activation rate (skill triggers on relevant prompts)
+- The change should improve output quality (assertions pass more often)
+- Be specific and actionable, not vague
+
+## Output Format (JSON)
+Return ONLY a JSON object with these fields:
+- "original_value": the current value of the variable you're changing
+- "new_value": your improved version
+- "hypothesis": one sentence explaining why this should improve KPIs
+- "changed_skill_content": the full skill file with your change applied"""
+
+    try:
+        client = get_client()
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        cost = estimate_cost(response.usage)
+        response_text = response.content[0].text
+
+        # Extract JSON from response (handle markdown code blocks)
+        json_text = response_text
+        if "```json" in json_text:
+            json_text = json_text.split("```json")[1].split("```")[0]
+        elif "```" in json_text:
+            json_text = json_text.split("```")[1].split("```")[0]
+
+        parsed = json.loads(json_text.strip())
+
+        return {
+            "variation_id": variation_id,
+            "variable": variable,
+            "original_value": parsed.get("original_value", ""),
+            "new_value": parsed.get("new_value", ""),
+            "hypothesis": parsed.get("hypothesis", ""),
+            "changed_skill_content": parsed.get("changed_skill_content", ""),
+            "cost_usd": cost,
+        }
+
+    except json.JSONDecodeError as e:
+        log_error(f"Failed to parse Claude response as JSON: {e}")
+        return {
+            "variation_id": variation_id,
+            "variable": variable,
+            "original_value": "[PARSE ERROR]",
+            "new_value": "[PARSE ERROR]",
+            "hypothesis": f"JSON parse error: {e}",
+            "cost_usd": 0.0,
+        }
+    except anthropic.APIError as e:
+        log_error(f"Claude API error: {e}")
+        return {
+            "variation_id": variation_id,
+            "variable": variable,
+            "original_value": "[API ERROR]",
+            "new_value": "[API ERROR]",
+            "hypothesis": f"API error: {e}",
+            "cost_usd": 0.0,
+        }
 
 
 def run_assertions(skill_name: str, assertions: list[Assertion], variation: dict) -> dict:
     """
-    STUB: Run assertions against a skill variation.
-
-    Wire this to actual skill execution and assertion checking.
-
-    Args:
-        skill_name: Name of the skill
-        assertions: List of assertions to run
-        variation: The variation being tested
-
-    Returns:
-        dict with metrics including pass_rate, safety_passed, execution_time
+    Run assertions against a skill variation by simulating skill execution
+    with Claude and evaluating each assertion against the output.
     """
-    # TODO: Wire to actual skill execution
-    # Example structure:
-    # 1. Load skill with variation applied
-    # 2. Run test prompts
-    # 3. Check each assertion
-    # 4. Return metrics
+    eval_data = load_eval_data(skill_name)
+    test_prompts = eval_data.get("test_prompts", [])
 
-    log_warning(f"run_assertions() is a stub - wire to actual execution")
+    # Use the varied skill content if available, otherwise the original
+    skill_content = variation.get("changed_skill_content", "") or load_skill_content(skill_name)
 
-    results = {
-        "pass_rate": 0.0,
-        "safety_passed": True,
-        "execution_time_ms": 0,
-        "assertions_run": len(assertions),
-        "assertions_passed": 0,
-        "cost_usd": 0.001,  # Stub cost
-    }
+    if not test_prompts:
+        log_warning(f"No test prompts for {skill_name}")
+        return {
+            "pass_rate": 0.0,
+            "safety_passed": True,
+            "execution_time_ms": 0,
+            "assertions_run": len(assertions),
+            "assertions_passed": 0,
+            "cost_usd": 0.0,
+        }
 
-    # Check for safety blockers
+    # Pick a random test prompt for this run
+    import random
+    test_prompt = random.choice(test_prompts)
+
+    start_time = time.time()
+    total_cost = 0.0
+
+    # Simulate skill execution via Claude
+    execution_prompt = f"""You are a Claude Code skill executing a user request. Follow the skill instructions exactly.
+
+## Skill Instructions
+```markdown
+{skill_content}
+```
+
+## User Request
+{test_prompt}
+
+## Output Format
+Return a JSON object representing the skill's output. Include fields that match what the skill would produce.
+For example, if the skill extracts transcripts, include a "transcript" field.
+If the skill creates PRs, include "pr_url", "title", "pr_body", "branch" fields.
+If the skill generates summaries, include "summary", "commits", "blockers" fields.
+
+Return ONLY the JSON object, no markdown formatting."""
+
+    try:
+        client = get_client()
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=1500,
+            messages=[{"role": "user", "content": execution_prompt}]
+        )
+
+        total_cost += estimate_cost(response.usage)
+        response_text = response.content[0].text
+
+        # Parse the simulated output
+        json_text = response_text
+        if "```json" in json_text:
+            json_text = json_text.split("```json")[1].split("```")[0]
+        elif "```" in json_text:
+            json_text = json_text.split("```")[1].split("```")[0]
+
+        try:
+            output = json.loads(json_text.strip())
+        except json.JSONDecodeError:
+            output = {"raw_output": response_text}
+
+    except anthropic.APIError as e:
+        log_error(f"Claude API error during execution: {e}")
+        output = {"error": str(e)}
+
+    execution_time_ms = (time.time() - start_time) * 1000
+
+    # Evaluate assertions against the output
+    passed_count = 0
+    safety_passed = True
+    assertion_results = []
+
     for assertion in assertions:
-        if assertion.weight == 3 and assertion.name in SAFETY_BLOCKERS:
-            # In real implementation, actually run the check
-            # For stub, assume all safety checks pass
-            pass
+        try:
+            # Evaluate the check expression with output and execution_time_ms in scope
+            result = eval(assertion.check, {"__builtins__": {
+                "len": len, "str": str, "int": int, "float": float,
+                "isinstance": isinstance, "any": any, "all": all,
+                "sum": sum, "dict": dict, "list": list, "set": set,
+            }}, {"output": output, "execution_time_ms": execution_time_ms})
 
-    return results
+            if result:
+                passed_count += 1
+            elif assertion.weight == 3:
+                safety_passed = False
+                log_warning(f"SAFETY BLOCKER FAILED: {assertion.name}")
+
+            assertion_results.append({
+                "name": assertion.name,
+                "passed": bool(result),
+                "weight": assertion.weight,
+            })
+
+        except Exception as e:
+            log_warning(f"Assertion {assertion.name} raised error: {e}")
+            if assertion.weight == 3:
+                safety_passed = False
+            assertion_results.append({
+                "name": assertion.name,
+                "passed": False,
+                "weight": assertion.weight,
+                "error": str(e),
+            })
+
+    pass_rate = passed_count / len(assertions) if assertions else 0.0
+
+    return {
+        "pass_rate": pass_rate,
+        "safety_passed": safety_passed,
+        "execution_time_ms": execution_time_ms,
+        "assertions_run": len(assertions),
+        "assertions_passed": passed_count,
+        "cost_usd": total_cost,
+        "test_prompt": test_prompt,
+        "assertion_results": assertion_results,
+    }
 
 
 # ============================================================================
