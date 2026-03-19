@@ -33,7 +33,7 @@ We use this as our organizing principle. Current status:
 | **AI SOPs** (skills for Claude) | Active | Skill files (.md) in skills directories |
 | **Knowledge Base** (reference docs) | Growing | This workspace, `index.json` files |
 | **Prompt Library** (versioned prompts) | Active | `prompts/` directory |
-| **Tools Registry** (tech stack catalog) | Implicit | MCP configs, not centralized |
+| **Tools Registry** (tech stack catalog) | Active | `TOOLS.md` |
 | **Projects & Workflows** (live implementations) | Partial | Scattered across repos |
 
 ## Principles
@@ -52,12 +52,13 @@ We use this as our organizing principle. Current status:
 | 2026-03-19 | Adopted AI OS framework as organizing principle | Video from Thaddeus Demeke mapped cleanly to what we're already building — gives us a shared vocabulary and gap analysis |
 | 2026-03-19 | Created CLAUDE.md as single source of truth | Highest-leverage action: one file that orients every future Claude session on what this system is and how it works |
 | 2026-03-19 | Built `prompts/` directory with initial library | Extracted working prompts from Timon analysis: LP updates, scenario matrices, options analysis. Now versioned and reusable. |
+| 2026-03-19 | Created `TOOLS.md` and `SKILLS.md` | Centralized tools registry and formalized the 3x rule for skill creation. AI OS framework now 5/7 assets active. |
 
 ## What's Next
 
 - [x] Build `prompts/` directory — version prompts that work well so they survive across sessions
-- [ ] Centralize tools registry — one file listing all MCP servers, what they do, which skills use them
-- [ ] Formalize the skill creation workflow — when a task repeats 3+ times, it becomes a skill
+- [x] Centralize tools registry — `TOOLS.md` lists all MCP servers, capabilities, and which skills use them
+- [x] Formalize the skill creation workflow — `SKILLS.md` defines the 3x rule and skill anatomy
 - [ ] Connect the decision log to Slack — decisions made in threads should flow back here
 
 ## For Future Claude Sessions
