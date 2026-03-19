@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'git commit'; then echo '[Hook] Remember: Include Slack thread URL in commit message per CLAUDE.md conventions'; fi",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'gh pr create'; then echo '[Hook] PR created - verify Slack thread is linked'; fi",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📋 Workspace: openclaw-workspace | Skills: /slack-to-pr, /audit-setup, /standup | See CLAUDE.md for conventions'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}
