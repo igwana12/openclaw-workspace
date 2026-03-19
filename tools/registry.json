@@ -208,6 +208,17 @@
         "category": "ai-os",
         "location": "/Volumes/Extreme Pro/ACTIVE/skill-maker",
         "capabilities": ["skill_generation", "template_management"]
+      },
+      {
+        "id": "self-improving-agent",
+        "name": "Self-Improving Agent",
+        "description": "Autonomous self-improvement loop based on Karpathy's autoresearch pattern",
+        "category": "ai-os",
+        "location": ".claude/skills/self-improving-agent.md",
+        "capabilities": ["activation_optimization", "quality_optimization", "experiment_tracking", "baseline_comparison", "variant_promotion"],
+        "triggers": ["/self-improve", "/improve", "/experiment"],
+        "layers": ["activation", "quality"],
+        "prompts_using": ["evaluation/skill-activation-v1", "evaluation/output-quality-v1", "evaluation/binary-assertion-v1"]
       }
     ],
     "content_tools": [
@@ -281,11 +292,11 @@
     "ai-assistant": {"description": "AI assistant systems", "custom_tools": ["jarvis", "smithers"]},
     "content-creation": {"description": "Content generation tools", "custom_tools": ["storyboard-generator", "sacred-circuits-pipeline-v2"]},
     "finance": {"description": "Financial analysis tools", "custom_tools": ["kubera"]},
-    "ai-os": {"description": "AI OS infrastructure", "custom_tools": ["skill-maker", "openclaw"]}
+    "ai-os": {"description": "AI OS infrastructure", "custom_tools": ["skill-maker", "openclaw", "self-improving-agent"]}
   },
   "stats": {
     "total_builtin_tools": 9,
-    "total_custom_tools": 15,
+    "total_custom_tools": 16,
     "total_mcp_configured": 0,
     "total_mcp_available": 2,
     "custom_tools_by_category": {

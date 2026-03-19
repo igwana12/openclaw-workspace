@@ -1,0 +1,24 @@
+{
+  "prompt_id": "extraction/video-transcript-v1",
+  "version": 1,
+  "baseline_captured_at": "2026-03-19T17:45:00Z",
+  "content_hash": "sha256:video-transcript-v1-baseline",
+  "metrics": {
+    "activation_rate": null,
+    "false_positive_rate": null,
+    "output_quality": null,
+    "samples_collected": 0
+  },
+  "when_to_use": [
+    "Extracting key points from video transcripts",
+    "Processing TikTok, YouTube, podcast transcripts",
+    "Identifying speakers and timestamps",
+    "Categorizing video content type"
+  ],
+  "when_not_to_use": [
+    "Non-video text content",
+    "Real-time transcription (this is for post-processing)",
+    "Audio-only without transcript"
+  ],
+  "status": "baseline_captured"
+}

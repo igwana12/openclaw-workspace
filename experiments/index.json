@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "description": "Self-Improving Agent Experiment Tracker - Tracks experiments, baselines, and results for continuous improvement",
+  "config": {
+    "run_frequency": "daily",
+    "run_time": "02:00",
+    "timezone": "UTC",
+    "max_concurrent_experiments": 3,
+    "min_samples_per_experiment": 10,
+    "promotion_threshold": 0.15,
+    "layers": {
+      "layer_1_activation": {
+        "enabled": true,
+        "priority": 1,
+        "kpis": ["activation_rate", "false_positive_rate"]
+      },
+      "layer_2_quality": {
+        "enabled": true,
+        "priority": 1,
+        "kpis": ["output_quality", "task_completion_rate", "assertion_pass_rate"]
+      }
+    }
+  },
+  "kpi_definitions": {
+    "activation_rate": {
+      "description": "Skill triggers correctly when it should",
+      "formula": "correct_activations / total_applicable_scenarios",
+      "target": 0.80,
+      "direction": "maximize"
+    },
+    "false_positive_rate": {
+      "description": "Skill triggers when it should not",
+      "formula": "incorrect_activations / total_non_applicable_scenarios",
+      "target": 0.05,
+      "direction": "minimize"
+    },
+    "output_quality": {
+      "description": "Quality of skill output measured by binary assertions",
+      "formula": "assertions_passed / total_assertions",
+      "target": 0.90,
+      "direction": "maximize"
+    },
+    "task_completion_rate": {
+      "description": "Tasks completed successfully",
+      "formula": "completed_tasks / total_attempted_tasks",
+      "target": 0.85,
+      "direction": "maximize"
+    },
+    "assertion_pass_rate": {
+      "description": "Binary assertion evaluation pass rate",
+      "formula": "pass_count / total_evaluations",
+      "target": 0.90,
+      "direction": "maximize"
+    }
+  },
+  "experiments": [],
+  "baselines": {
+    "prompts": {
+      "extraction/video-transcript-v1": {
+        "version": 1,
+        "captured_at": "2026-03-19T17:45:00Z",
+        "file": "baselines/video-transcript-v1.json"
+      },
+      "summarization/slack-thread-v2": {
+        "version": 2,
+        "captured_at": "2026-03-19T17:45:00Z",
+        "file": "baselines/slack-thread-v2.json"
+      }
+    },
+    "skills": {}
+  },
+  "stats": {
+    "total_experiments_run": 0,
+    "total_promotions": 0,
+    "total_failures": 0,
+    "last_run": null,
+    "cumulative_improvement": {
+      "activation_rate": 0,
+      "output_quality": 0
+    },
+    "baselines_captured": 2
+  },
+  "created_at": "2026-03-19T00:00:00Z",
+  "updated_at": "2026-03-19T17:45:00Z"
+}

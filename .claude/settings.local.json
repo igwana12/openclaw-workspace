@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": {
+          "tool": "Skill",
+          "skill_name": "self-improving-agent"
+        },
+        "commands": [
+          {
+            "command": "echo '{\"timestamp\": \"'$(date -Iseconds)'\", \"event\": \"skill_used\", \"skill\": \"self-improving-agent\"}' >> prompts/usage.jsonl"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "commands": [
+          {
+            "command": "cat experiments/results/latest-overnight-summary.json 2>/dev/null || echo '{\"status\": \"no overnight runs yet\"}'"
+          }
+        ]
+      }
+    ]
+  },
+  "self_improving_agent": {
+    "enabled": true,
+    "schedule": {
+      "frequency": "daily",
+      "time": "02:00",
+      "timezone": "UTC"
+    },
+    "layers": {
+      "activation": true,
+      "quality": true
+    },
+    "promotion_threshold": 0.15,
+    "max_concurrent_experiments": 3,
+    "min_samples": 10
+  }
+}

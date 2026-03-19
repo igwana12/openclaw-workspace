@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": "OpenClaw AI OS",
   "description": "Personal AI operating system for knowledge work - based on the 3 Buckets, 7 Assets framework",
   "framework": {
@@ -86,8 +86,21 @@
           "path": null,
           "extreme_pro_source": "/Volumes/Extreme Pro/ACTIVE",
           "status": "cataloged",
-          "project_count": 23,
-          "note": "23 active projects cataloged from Extreme Pro"
+          "project_count": 24,
+          "note": "23 active projects cataloged from Extreme Pro + self-improving-agent"
+        },
+        "self_improving_agent": {
+          "description": "Autonomous self-improvement loop based on Karpathy's autoresearch pattern",
+          "skill_path": ".claude/skills/self-improving-agent.md",
+          "program_path": "program.md",
+          "experiments_path": "experiments/",
+          "status": "active",
+          "config": {
+            "layers": ["activation", "quality"],
+            "run_frequency": "daily",
+            "run_time": "02:00",
+            "promotion_threshold": 0.15
+          }
         }
       }
     }

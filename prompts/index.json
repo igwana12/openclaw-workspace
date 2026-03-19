@@ -18,6 +18,10 @@
     "transformation": {
       "description": "Convert content between formats",
       "prompts": []
+    },
+    "evaluation": {
+      "description": "Evaluate skills and prompts for self-improvement loop",
+      "prompts": ["evaluation/skill-activation-v1", "evaluation/output-quality-v1", "evaluation/binary-assertion-v1"]
     }
   },
   "prompts": [
@@ -50,18 +54,64 @@
         "success_rate": null,
         "last_used": null
       }
+    },
+    {
+      "id": "evaluation/skill-activation-v1",
+      "name": "skill-activation-evaluation",
+      "version": 1,
+      "path": "evaluation/skill-activation-v1.md",
+      "category": "evaluation",
+      "status": "active",
+      "created_at": "2026-03-19T00:00:00Z",
+      "tags": ["evaluation", "activation", "layer-1", "self-improvement"],
+      "usage_stats": {
+        "total_uses": 0,
+        "success_rate": null,
+        "last_used": null
+      }
+    },
+    {
+      "id": "evaluation/output-quality-v1",
+      "name": "output-quality-evaluation",
+      "version": 1,
+      "path": "evaluation/output-quality-v1.md",
+      "category": "evaluation",
+      "status": "active",
+      "created_at": "2026-03-19T00:00:00Z",
+      "tags": ["evaluation", "quality", "layer-2", "self-improvement"],
+      "usage_stats": {
+        "total_uses": 0,
+        "success_rate": null,
+        "last_used": null
+      }
+    },
+    {
+      "id": "evaluation/binary-assertion-v1",
+      "name": "binary-assertion-evaluation",
+      "version": 1,
+      "path": "evaluation/binary-assertion-v1.md",
+      "category": "evaluation",
+      "status": "active",
+      "created_at": "2026-03-19T00:00:00Z",
+      "tags": ["evaluation", "assertion", "binary", "karpathy-style"],
+      "usage_stats": {
+        "total_uses": 0,
+        "success_rate": null,
+        "last_used": null
+      }
     }
   ],
   "stats": {
-    "total_prompts": 2,
+    "total_prompts": 5,
     "by_category": {
       "extraction": 1,
       "summarization": 1,
       "analysis": 0,
-      "transformation": 0
+      "transformation": 0,
+      "evaluation": 3
     },
     "by_status": {
-      "active": 2,
+      "active": 5,
       "deprecated": 0,
       "draft": 0
     }

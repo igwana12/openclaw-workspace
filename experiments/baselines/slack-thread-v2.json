@@ -1,0 +1,23 @@
+{
+  "prompt_id": "summarization/slack-thread-v2",
+  "version": 2,
+  "baseline_captured_at": "2026-03-19T17:45:00Z",
+  "content_hash": "sha256:slack-thread-v2-baseline",
+  "metrics": {
+    "activation_rate": null,
+    "false_positive_rate": null,
+    "output_quality": null,
+    "samples_collected": 0
+  },
+  "when_to_use": [
+    "Summarizing Slack conversation threads",
+    "Extracting decisions and action items from threads",
+    "Creating meeting-style summaries from async discussions"
+  ],
+  "when_not_to_use": [
+    "Non-Slack message formats",
+    "Single messages (not threads)",
+    "Channels without threaded discussions"
+  ],
+  "status": "baseline_captured"
+}

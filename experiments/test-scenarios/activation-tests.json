@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "description": "Test scenarios for Layer 1 activation evaluation",
+  "scenarios": [
+    {
+      "id": "video-transcript-positive-1",
+      "target_skill": "extraction/video-transcript-v1",
+      "user_request": "Extract the main points from this TikTok video",
+      "expected_activation": true,
+      "category": "positive"
+    },
+    {
+      "id": "video-transcript-positive-2",
+      "target_skill": "extraction/video-transcript-v1",
+      "user_request": "What does this YouTube video talk about?",
+      "expected_activation": true,
+      "category": "positive"
+    },
+    {
+      "id": "video-transcript-positive-3",
+      "target_skill": "extraction/video-transcript-v1",
+      "user_request": "Summarize the key takeaways from this video transcript",
+      "expected_activation": true,
+      "category": "positive"
+    },
+    {
+      "id": "video-transcript-negative-1",
+      "target_skill": "extraction/video-transcript-v1",
+      "user_request": "Write me a Python function to sort a list",
+      "expected_activation": false,
+      "category": "negative"
+    },
+    {
+      "id": "video-transcript-negative-2",
+      "target_skill": "extraction/video-transcript-v1",
+      "user_request": "What's the weather like today?",
+      "expected_activation": false,
+      "category": "negative"
+    },
+    {
+      "id": "slack-thread-positive-1",
+      "target_skill": "summarization/slack-thread-v2",
+      "user_request": "Summarize this Slack conversation for me",
+      "expected_activation": true,
+      "category": "positive"
+    },
+    {
+      "id": "slack-thread-positive-2",
+      "target_skill": "summarization/slack-thread-v2",
+      "user_request": "What were the action items from this thread?",
+      "expected_activation": true,
+      "category": "positive"
+    },
+    {
+      "id": "slack-thread-negative-1",
+      "target_skill": "summarization/slack-thread-v2",
+      "user_request": "Help me debug this JavaScript error",
+      "expected_activation": false,
+      "category": "negative"
+    }
+  ],
+  "created_at": "2026-03-19T00:00:00Z"
+}

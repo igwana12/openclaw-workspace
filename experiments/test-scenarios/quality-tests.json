@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "description": "Test scenarios for Layer 2 quality evaluation with binary assertions",
+  "scenarios": [
+    {
+      "id": "video-extract-quality-1",
+      "target_skill": "extraction/video-transcript-v1",
+      "input": {
+        "transcript": "Welcome to my video about Python generators. Generators are a powerful feature that lets you create iterators in a memory-efficient way. The key is the yield keyword, which pauses execution and returns a value. When you call next() on a generator, it resumes from where it left off.",
+        "metadata": {
+          "platform": "YouTube",
+          "creator": "PythonPro",
+          "duration": "5:30"
+        }
+      },
+      "assertions": [
+        {
+          "id": "has-core-message",
+          "description": "Output includes a clear core message",
+          "check": "output contains a summary of the main topic"
+        },
+        {
+          "id": "has-key-points",
+          "description": "Output lists key points",
+          "check": "output contains at least 2 key points as a list"
+        },
+        {
+          "id": "has-technical-terms",
+          "description": "Output preserves technical terminology",
+          "check": "output mentions 'generators', 'yield', and 'iterators'"
+        }
+      ]
+    },
+    {
+      "id": "slack-summarize-quality-1",
+      "target_skill": "summarization/slack-thread-v2",
+      "input": {
+        "thread": [
+          {"user": "alice", "text": "Hey team, we need to decide on the API versioning strategy", "timestamp": "10:00"},
+          {"user": "bob", "text": "I suggest semantic versioning with path prefixes like /v1/", "timestamp": "10:05"},
+          {"user": "alice", "text": "Good idea. Let's also add deprecation headers", "timestamp": "10:10"},
+          {"user": "charlie", "text": "Agreed. I'll create the RFC by Friday", "timestamp": "10:15"}
+        ]
+      },
+      "assertions": [
+        {
+          "id": "has-summary",
+          "description": "Output includes a clear summary",
+          "check": "output summarizes the API versioning discussion"
+        },
+        {
+          "id": "has-decision",
+          "description": "Output captures the decision made",
+          "check": "output mentions semantic versioning and path prefixes"
+        },
+        {
+          "id": "has-action-item",
+          "description": "Output lists action items",
+          "check": "output mentions charlie creating RFC by Friday"
+        }
+      ]
+    }
+  ],
+  "created_at": "2026-03-19T00:00:00Z"
+}
