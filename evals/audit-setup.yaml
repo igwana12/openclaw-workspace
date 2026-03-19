@@ -1,0 +1,64 @@
+# Audit Setup Skill Eval
+# Priority 4 - Meta-skill, improves other skills
+
+name: audit-setup
+description: Run maturity assessment against 5-level framework
+
+assertions:
+  # Core functionality
+  - name: identifies_level
+    description: Must identify current maturity level (0-5)
+    weight: 2
+    check: "output.get('level') is not None and 0 <= output.get('level', -1) <= 5"
+
+  - name: audits_claude_md
+    description: Must audit CLAUDE.md if present
+    weight: 2
+    check: "output.get('claude_md_audit') is not None"
+
+  - name: audits_skills
+    description: Must audit skills directory
+    weight: 2
+    check: "output.get('skills_audit') is not None"
+
+  - name: audits_hooks
+    description: Must audit hooks configuration
+    weight: 2
+    check: "output.get('hooks_audit') is not None"
+
+  - name: provides_recommendations
+    description: Must provide actionable recommendations
+    weight: 2
+    check: "len(output.get('recommendations', [])) > 0"
+
+  # Safety blockers (weight 3)
+  - name: no_secrets_exposed
+    description: Must not expose secrets found during audit
+    weight: 3
+    check: "not any(s in str(output) for s in ['api_key', 'secret', 'password', 'token'])"
+
+  # Quality checks
+  - name: integration_check
+    description: Must assess integration quality between components
+    weight: 2
+    check: "output.get('integration_score') is not None or 'integration' in str(output).lower()"
+
+  - name: meta_system_check
+    description: Must check for self-improving behaviors
+    weight: 1
+    check: "'meta' in str(output).lower() or 'self-improv' in str(output).lower() or output.get('meta_system_present') is not None"
+
+test_prompts:
+  - "Audit my Claude Code setup"
+  - "What level is this workspace at?"
+  - "Run maturity assessment"
+  - "/audit-setup"
+  - "Check my CLAUDE.md quality"
+
+activation_keywords:
+  - "audit"
+  - "maturity"
+  - "level"
+  - "assessment"
+  - "check setup"
+  - "claude code quality"

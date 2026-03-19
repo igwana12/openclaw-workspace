@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "if echo \"$TOOL_INPUT\" | grep -qE '(git commit|gh pr create)'; then echo '[Hook] Remember to include Slack thread URL in commit/PR'; fi"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "if echo \"$TOOL_INPUT\" | grep -q 'gh pr create'; then echo '[Hook] Verify Slack thread link is in PR body'; fi"
+      }
+    ],
+    "SessionStart": [
+      {
+        "command": "echo '=== OpenClaw Workspace ===' && echo 'Level 5: Self-Improving Meta-Systems' && echo '' && echo 'Available skills: /slack-to-pr, /standup, /audit-setup, /run-experiment' && echo 'Priority stack: video-ingestor > slack-to-pr > standup > audit-setup' && echo '' && if [ -f .learnings/EXPERIMENTS.md ]; then echo \"Experiments logged: $(grep -c '^## ' .learnings/EXPERIMENTS.md 2>/dev/null || echo 0)\"; fi"
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(python .learnings/run-experiment.py *)"
+    ]
+  }
+}

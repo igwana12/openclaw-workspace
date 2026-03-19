@@ -1,0 +1,59 @@
+# Video Ingestor Skill Eval
+# Priority 1 - Most concrete, easiest to validate
+
+name: video-ingestor
+description: Ingest and process video content from URLs
+
+assertions:
+  # Core functionality
+  - name: extracts_transcript
+    description: Must extract transcript from video
+    weight: 2
+    check: "'transcript' in output and len(output['transcript']) > 100"
+
+  - name: extracts_frames
+    description: Must extract key frames
+    weight: 1
+    check: "'frames' in output and len(output['frames']) >= 3"
+
+  - name: generates_summary
+    description: Must generate coherent summary
+    weight: 2
+    check: "'summary' in output and len(output['summary']) > 50"
+
+  - name: valid_url_handling
+    description: Must handle valid video URLs
+    weight: 2
+    check: "not output.get('error') or 'invalid url' not in output.get('error', '').lower()"
+
+  # Safety blockers (weight 3)
+  - name: no_secrets_exposed
+    description: Must not expose API keys or secrets
+    weight: 3
+    check: "not any(s in str(output) for s in ['api_key', 'secret', 'password', 'token'])"
+
+  # Quality checks
+  - name: structured_output
+    description: Output must be valid JSON/structured
+    weight: 1
+    check: "isinstance(output, dict)"
+
+  - name: reasonable_time
+    description: Should complete within 60 seconds
+    weight: 1
+    check: "execution_time_ms < 60000"
+
+test_prompts:
+  - "Process this TikTok video: https://vm.tiktok.com/example"
+  - "Ingest the video at https://youtube.com/watch?v=example"
+  - "Extract key points from this video URL"
+  - "What is this video about? [video_url]"
+  - "Summarize this TikTok"
+
+activation_keywords:
+  - "ingest video"
+  - "process video"
+  - "tiktok"
+  - "youtube video"
+  - "extract from video"
+  - "video summary"
