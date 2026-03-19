@@ -96,6 +96,28 @@ These assertions **hard-reject** any experiment that fails them:
 - **Skills**: Target of optimization, read from `.claude/commands/`
 - **Hooks**: Enforce safety, trigger experiments
 - **Slack**: Report results via `--report-to-slack`
+- **Extreme Pro Drive**: Primary data store at `/Volumes/Extreme Pro/`
+
+## External Storage: Extreme Pro SSD
+
+The Extreme Pro (4TB ExFAT) is the canonical source of truth for skills, configs, and data.
+
+| What | Path on Drive |
+|------|---------------|
+| Existing skill definitions | `/Volumes/Extreme Pro/SKILLS/` |
+| Video ingestor assets | `/Volumes/Extreme Pro/video injestor/` |
+| OpenClaw documentation | `/Volumes/Extreme Pro/DOCS/OpenClaw/` |
+| AI workspace / projects | `/Volumes/Extreme Pro/AI_WORKSPACE/` |
+| Configuration files | `/Volumes/Extreme Pro/CONFIG/` |
+| Best practices reference | `/Volumes/Extreme Pro/BEST PRACTICES/` |
+| Infrastructure scripts | `/Volumes/Extreme Pro/INFRASTRUCTURE/` |
+| API keys (SENSITIVE) | `/Volumes/Extreme Pro/API_KEYS/` |
+
+### Rules
+1. **Check the drive first** before creating new skills or configs
+2. **Sync promoted experiments** back to `SKILLS/` on the drive
+3. **NEVER expose** contents of `API_KEYS/` or `Investments/`
+4. **Load existing baselines** from the drive if available
 
 ## The 10 Commandments
 

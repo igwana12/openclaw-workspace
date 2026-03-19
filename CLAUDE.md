@@ -112,6 +112,63 @@ python .learnings/run-experiment.py --report-to-slack
 9. Review failures for learnings
 10. Never modify production skills during market hours
 
+## External Storage: Extreme Pro Drive
+
+**IMPORTANT:** The Extreme Pro SSD is the primary data store. Always check it for existing assets before creating new ones.
+
+- **Mount point (macOS):** `/Volumes/Extreme Pro/`
+- **Type:** ExFAT, 4TB (2.34TB used, 1.66TB available)
+- **Always available** when connected to the local machine
+
+### Drive Map
+
+```
+/Volumes/Extreme Pro/
+├── SKILLS/                    # Skill definitions and templates
+├── MIGRATION/                 # Migration scripts and data
+├── sacred-circuits-outputs/   # Sacred Circuits pipeline outputs
+│   └── train_apollo_phase0.sh
+├── BEST PRACTICES/            # Best practices documentation
+├── Book Injestor/             # Book ingestion pipeline
+├── PANTHEON_LOGS/             # Pantheon system logs
+├── ACTIVE/                    # Active projects and work-in-progress
+├── video injestor/            # Video ingestion pipeline assets
+├── ARCHIVE/                   # Archived projects
+├── PANTHEON_OUTPUT/            # Pantheon pipeline outputs
+├── MYTHS/                     # Myths content/research
+├── Sacred Circuits Global Media B.../  # Sacred Circuits media
+├── CONTENT/                   # Content library
+├── DOCS/                      # Documentation
+│   └── OpenClaw/              # OpenClaw project docs
+├── CONFIG/                    # Configuration files
+├── RESOURCES/                 # Shared resources
+├── INFRASTRUCTURE/            # Infrastructure configs and scripts
+├── DATA/                      # Raw data storage
+├── AI_WORKSPACE/              # AI projects workspace
+├── Investments/               # Investment tracking (SENSITIVE)
+├── API_KEYS/                  # API keys storage (SENSITIVE - never expose)
+└── MANUALS/                   # Reference manuals
+```
+
+### Key Directories for This Workspace
+
+| Purpose | Path |
+|---------|------|
+| Existing skills | `/Volumes/Extreme Pro/SKILLS/` |
+| Video ingestor assets | `/Volumes/Extreme Pro/video injestor/` |
+| OpenClaw docs | `/Volumes/Extreme Pro/DOCS/OpenClaw/` |
+| AI workspace | `/Volumes/Extreme Pro/AI_WORKSPACE/` |
+| Config files | `/Volumes/Extreme Pro/CONFIG/` |
+| Best practices | `/Volumes/Extreme Pro/BEST PRACTICES/` |
+| API keys | `/Volumes/Extreme Pro/API_KEYS/` (NEVER expose contents) |
+
+### Rules
+
+1. **Check Extreme Pro first** before creating new skills, configs, or data
+2. **NEVER read or expose** contents of `API_KEYS/` or `Investments/` in outputs
+3. **Sync learnings** back to the drive when promoting experiments
+4. **Reference existing assets** from the drive rather than duplicating them
+
 ## File Structure
 
 ```

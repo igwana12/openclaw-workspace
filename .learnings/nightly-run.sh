@@ -11,6 +11,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE_DIR="$(dirname "$SCRIPT_DIR")"
 EXPERIMENT_RUNNER="$SCRIPT_DIR/run-experiment.py"
 LOG_FILE="$SCRIPT_DIR/nightly.log"
+EXTREME_PRO="/Volumes/Extreme Pro"
 
 echo "============================================="
 echo "Nightly Experiment Run: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
@@ -46,6 +47,27 @@ if [ -n "$(git status --porcelain)" ]; then
 Automated by self-improving agent loop.
 See .learnings/PROMOTIONS.md for details."
     git push origin HEAD
+fi
+
+# Step 4: Sync promotions to Extreme Pro drive (if mounted)
+if [ -d "$EXTREME_PRO" ]; then
+    echo "Extreme Pro detected - syncing..."
+
+    # Sync promoted skills back to drive
+    if [ -d "$WORKSPACE_DIR/.claude/commands" ]; then
+        mkdir -p "$EXTREME_PRO/SKILLS/openclaw-promoted"
+        cp -u "$WORKSPACE_DIR/.claude/commands/"*.md "$EXTREME_PRO/SKILLS/openclaw-promoted/" 2>/dev/null || true
+    fi
+
+    # Sync learnings and experiment logs
+    mkdir -p "$EXTREME_PRO/DATA/experiment-logs"
+    cp -u "$SCRIPT_DIR/EXPERIMENTS.md" "$EXTREME_PRO/DATA/experiment-logs/" 2>/dev/null || true
+    cp -u "$SCRIPT_DIR/LEARNINGS.md" "$EXTREME_PRO/DATA/experiment-logs/" 2>/dev/null || true
+    cp -u "$SCRIPT_DIR/PROMOTIONS.md" "$EXTREME_PRO/DATA/experiment-logs/" 2>/dev/null || true
+
+    echo "Sync to Extreme Pro complete"
+else
+    echo "Extreme Pro not mounted - skipping drive sync"
 fi
 
 echo "============================================="

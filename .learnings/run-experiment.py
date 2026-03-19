@@ -41,6 +41,13 @@ LEARNINGS_DIR = Path(__file__).parent
 EVALS_DIR = LEARNINGS_DIR.parent / "evals"
 SKILLS_DIR = LEARNINGS_DIR.parent / ".claude" / "commands"
 
+# Extreme Pro SSD - primary data store (macOS mount point)
+EXTREME_PRO = Path("/Volumes/Extreme Pro")
+EXTREME_PRO_SKILLS = EXTREME_PRO / "SKILLS"
+EXTREME_PRO_DATA = EXTREME_PRO / "DATA"
+EXTREME_PRO_CONFIG = EXTREME_PRO / "CONFIG"
+EXTREME_PRO_AI = EXTREME_PRO / "AI_WORKSPACE"
+
 # Weight-3 safety blockers - these hard-reject any experiment
 SAFETY_BLOCKERS = [
     "stop_loss_present",
@@ -365,7 +372,16 @@ def estimate_cost(usage) -> float:
 # ============================================================================
 
 def load_skill_content(skill_name: str) -> str:
-    """Load the skill markdown file content."""
+    """Load skill file, checking Extreme Pro drive first, then local."""
+    # Check Extreme Pro drive first (canonical source)
+    if EXTREME_PRO_SKILLS.exists():
+        for pattern in [f"{skill_name}.md", f"{skill_name}/*.md", f"**/{skill_name}.md"]:
+            matches = list(EXTREME_PRO_SKILLS.glob(pattern))
+            if matches:
+                log(f"Loading skill from Extreme Pro: {matches[0]}")
+                return matches[0].read_text()
+
+    # Fall back to local workspace
     skill_file = SKILLS_DIR / f"{skill_name}.md"
     if not skill_file.exists():
         return f"[Skill file not found: {skill_file}]"
