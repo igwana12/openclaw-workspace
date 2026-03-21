@@ -1,0 +1,9 @@
+# Secrets — never commit tokens
+.openclaw/workspace/secrets/*.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
