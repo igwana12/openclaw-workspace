@@ -38,12 +38,13 @@ Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
 
 ## Available Skills
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
-| `/slack-to-pr` | "create pr", "pull request" | Convert Slack thread to PR |
-| `/standup` | "standup", "daily update" | Summary of recent work |
-| `/audit-setup` | "audit", "maturity level" | Run 5-level maturity assessment |
-| `/run-experiment` | "run experiment", "optimize" | Trigger self-improvement cycle |
+| Skill | Trigger | Description | Priority |
+|-------|---------|-------------|----------|
+| `/video-ingestor` | "tiktok", "youtube video", "ingest video" | Extract transcript/frames/summary from video URLs | 1 (highest) |
+| `/slack-to-pr` | "create pr", "pull request" | Convert Slack thread to PR | 2 |
+| `/standup` | "standup", "daily update" | Summary of recent work | 3 |
+| `/audit-setup` | "audit", "maturity level" | Run 5-level maturity assessment | 4 |
+| `/run-experiment` | "run experiment", "optimize" | Trigger self-improvement cycle | - |
 
 ## Self-Improving Agent System
 
@@ -168,6 +169,37 @@ python .learnings/run-experiment.py --report-to-slack
 2. **NEVER read or expose** contents of `API_KEYS/` or `Investments/` in outputs
 3. **Sync learnings** back to the drive when promoting experiments
 4. **Reference existing assets** from the drive rather than duplicating them
+
+## Troubleshooting
+
+### Stale Baselines
+If baselines show `name 'output' is not defined` errors, refresh them:
+```bash
+python .learnings/run-experiment.py --baseline --verbose
+```
+
+### Slack Reporting Not Working
+The `--report-to-slack` flag is not yet implemented. Results are logged to:
+- `.learnings/EXPERIMENTS.md` - All experiment runs
+- `.learnings/PROMOTIONS.md` - Successful improvements
+
+### Extreme Pro Drive Not Found
+The drive paths assume macOS (`/Volumes/Extreme Pro/`). On Linux:
+- Mount to `/mnt/extreme-pro/` and update paths in `run-experiment.py`
+- Or run without drive sync (local-only mode)
+
+### Low Pass Rates
+If skills are failing assertions:
+1. Check eval assertions in `/evals/<skill>.yaml`
+2. Review baseline JSON in `.learnings/baselines/<skill>.json`
+3. Ensure skill file exists in `.claude/commands/<skill>.md`
+
+### Nightly Cron Not Running
+Verify crontab entry:
+```bash
+crontab -l | grep nightly-run
+```
+Expected: `0 2 * * * /path/to/.learnings/nightly-run.sh >> /path/to/.learnings/nightly.log 2>&1`
 
 ## File Structure
 

@@ -176,13 +176,27 @@ def log_verbose(msg: str, config: ExperimentConfig):
         log(msg, "DEBUG")
 
 
+_ID_COUNTER = {}  # Track IDs generated this session
+
 def generate_id(prefix: str) -> str:
     """Generate ID in TYPE-YYYYMMDD-XXX format."""
     date = datetime.now().strftime("%Y%m%d")
-    # Simple incrementing counter based on existing IDs
-    existing = list(LEARNINGS_DIR.glob(f"*.md"))
-    counter = len(existing) + 1
-    return f"{prefix}-{date}-{counter:03d}"
+    key = f"{prefix}-{date}"
+
+    # Initialize counter from existing logs if first call
+    if key not in _ID_COUNTER:
+        # Count existing IDs with this prefix in EXPERIMENTS.md
+        experiments_file = LEARNINGS_DIR / "EXPERIMENTS.md"
+        if experiments_file.exists():
+            content = experiments_file.read_text()
+            import re
+            matches = re.findall(rf'{prefix}-{date}-(\d+)', content)
+            _ID_COUNTER[key] = max([int(m) for m in matches], default=0)
+        else:
+            _ID_COUNTER[key] = 0
+
+    _ID_COUNTER[key] += 1
+    return f"{prefix}-{date}-{_ID_COUNTER[key]:03d}"
 
 
 # ============================================================================
